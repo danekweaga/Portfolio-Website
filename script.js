@@ -139,22 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   
-  // Typing effect for main title (optional enhancement)
-  function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    element.style.opacity = '1';
-    
-    function type() {
-      if (i < text.length) {
-        element.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(type, speed);
-      }
-    }
-    type();
-  }
-  
   // Progressive enhancement for reduced motion preference
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     // Disable complex animations for users who prefer reduced motion
@@ -176,6 +160,88 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('mousedown', () => {
     document.body.classList.remove('keyboard-navigation');
   });
+
+  // Clock: update element with local time every second
+  const clockEl = document.querySelector('.clock');
+  function updateClock() {
+    if (!clockEl) return;
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // Typewriter greeting effect
+  const greetings = ['Hello', 'Hola', 'Bonjour', 'こんにちは', '안녕하세요', 'שלום', 'مرحبا', 'नमस्ते', 'Olá', 'Ciao'];
+  const greetingEl = document.querySelector('.greeting');
+  let greetIndex = 0;
+  let charIndex = 0;
+  let typing = true;
+
+  function typeGreeting() {
+    if (!greetingEl) return;
+    const current = greetings[greetIndex];
+    if (typing) {
+      // type forward
+      greetingEl.textContent = current.slice(0, charIndex + 1);
+      charIndex++;
+      if (charIndex > current.length) {
+        typing = false;
+        setTimeout(typeGreeting, 900);
+        return;
+      }
+      setTimeout(typeGreeting, 120);
+    } else {
+      // erase
+      greetingEl.textContent = current.slice(0, charIndex - 1);
+      charIndex--;
+      if (charIndex <= 0) {
+        typing = true;
+        greetIndex = (greetIndex + 1) % greetings.length;
+        setTimeout(typeGreeting, 300);
+        return;
+      }
+      setTimeout(typeGreeting, 80);
+    }
+  }
+  // start typing
+  typeGreeting();
+
+  // Detect when topbar visually overlaps sections and add a blur to those sections
+  const topbar = document.querySelector('.topbar');
+  const sections = document.querySelectorAll('section');
+
+  function checkOverlap() {
+    if (!topbar) return;
+    const topbarRect = topbar.getBoundingClientRect();
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      const overlap = !(rect.bottom < topbarRect.top || rect.top > topbarRect.bottom || rect.right < topbarRect.left || rect.left > topbarRect.right);
+      if (overlap) sec.classList.add('section-blur'); else sec.classList.remove('section-blur');
+    });
+  }
+
+  // Throttle overlap checks for performance
+  let overlapTimeout;
+  window.addEventListener('scroll', () => {
+    if (overlapTimeout) cancelAnimationFrame(overlapTimeout);
+    overlapTimeout = requestAnimationFrame(checkOverlap);
+  }, { passive: true });
+
+  // Run initially
+  checkOverlap();
+
+  // Resume download fallback: if resume file missing, disable link gracefully
+  const resumeLink = document.getElementById('download-resume');
+  if (resumeLink) {
+    resumeLink.addEventListener('click', (e) => {
+      // Let browser attempt download; if file missing server returns 404.
+      // Optionally we could check via fetch and warn, but keeping it simple.
+    });
+  }
 });
 
 // Performance optimization: debounce scroll events
