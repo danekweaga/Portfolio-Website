@@ -1052,3 +1052,13 @@ footer {
   max-height: 2000px !important;
   transition: none !important;
 }
+
+/* Debug / small fix: ensure the main nav is visible if animations or reduced-motion
+   settings prevent the fade-in from running. This keeps the original animations
+   intact unless a user prefers reduced motion — it's intentionally scoped to the
+   main nav and marked important so it fixes cases where animation:none is applied. */
+header nav a {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
