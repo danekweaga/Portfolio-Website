@@ -59,23 +59,54 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('nav a');
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetId = link.getAttribute('href');
-      const targetSection = document.querySelector(targetId);
-      
-      if (targetSection) {
-        const offsetTop = targetSection.offsetTop - 50;
-        window.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth'
-        });
-        
-        // Add active state animation
+      const href = link.getAttribute('href');
+
+      // If this is an in-page anchor (starts with '#'), intercept and smooth-scroll.
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const targetSection = document.querySelector(href);
+        if (targetSection) {
+          const offsetTop = targetSection.offsetTop - 50;
+          window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+        }
+        // visual feedback
         link.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-          link.style.transform = '';
-        }, 150);
+        setTimeout(() => { link.style.transform = ''; }, 150);
+        return;
       }
+
+      // For non-hash links (files or external), allow default browser behavior.
+      // For same-origin resume file we can also provide a JS fallback to force download
+      // in browsers that ignore the `download` attribute on cross-origin links.
+      if (href && href.endsWith('.pdf')) {
+        // If browser supports download attribute we leave it (it's set in markup).
+        // As a conservative fallback, attempt a fetch & blob-download for same-origin files.
+        try {
+          const url = new URL(href, window.location.href);
+          if (url.origin === window.location.origin) {
+            e.preventDefault();
+            fetch(url.href).then(resp => {
+              if (!resp.ok) throw new Error('Network response was not ok');
+              return resp.blob();
+            }).then(blob => {
+              const blobUrl = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = blobUrl;
+              a.download = href.split('/').pop() || 'resume.pdf';
+              document.body.appendChild(a);
+              a.click();
+              a.remove();
+              URL.revokeObjectURL(blobUrl);
+            }).catch(() => {
+              // If fetch fails, fallback to letting the browser navigate normally
+              window.location.href = href;
+            });
+          }
+        } catch (err) {
+          // If anything goes wrong parsing the URL, let the browser handle it
+        }
+      }
+      // otherwise allow default navigation for external links
     });
   });
   
