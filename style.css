@@ -944,4 +944,40 @@ footer {
     transform: translateZ(0);
     will-change: transform, opacity !important;
   }
+
+  /* Ensure project details can fully expand on mobile (avoid clipping) */
+  .project-details, .project-details.open {
+    overflow: visible !important;
+    max-height: 2000px !important; /* large safe value so content isn't clipped */
+    transition: none !important; /* avoid transition jank when opening */
+    padding: 0.8rem 0.6rem 0.6rem 0.6rem !important;
+  }
+
+  /* Some parent/backdrop elements still used backdrop-filter; turn them off on mobile */
+  header, .topbar, .skills, .video-modal-backdrop, .video-modal-content {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Ensure hover rules that set black text/white background are fully overridden */
+  nav a, #download-resume, .links a {
+    background-color: transparent !important;
+    color: #fff !important;
+    border: 0 !important;
+  }
+
+  nav a:hover, nav a:active, nav a:focus,
+  #download-resume:hover, #download-resume:active, #download-resume:focus,
+  .links a:hover, .links a:active, .links a:focus {
+    background-color: rgba(255,255,255,0.06) !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    transform: none !important;
+  }
+
+  /* Extra mobile composition hints */
+  html, body, a, button {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+  }
 }
