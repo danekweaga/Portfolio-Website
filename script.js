@@ -174,65 +174,87 @@ document.addEventListener('DOMContentLoaded', () => {
   updateClock();
   setInterval(updateClock, 1000);
 
-  // Typewriter greeting effect
-  const greetings = ['Hello', 'Hola', 'Bonjour', 'こんにちは', '안녕하세요', 'שלום', 'مرحبا', 'नमस्ते', 'Olá', 'Ciao'];
+  // Rotating greetings for the topbar
+  const greetings = [
+    'Hello', 'Hola', 'Bonjour', 'こんにちは', '안녕하세요', 'שלום', 'مرحبا', 'नमस्ते', 'Olá', 'Ciao'
+  ];
   const greetingEl = document.querySelector('.greeting');
   let greetIndex = 0;
-  let charIndex = 0;
-  let typing = true;
-
-  function typeGreeting() {
+  function rotateGreeting() {
     if (!greetingEl) return;
-    const current = greetings[greetIndex];
-    if (typing) {
-      // type forward
-      greetingEl.textContent = current.slice(0, charIndex + 1);
-      charIndex++;
-      if (charIndex > current.length) {
-        typing = false;
-        setTimeout(typeGreeting, 900);
-        return;
-      }
-      setTimeout(typeGreeting, 120);
-    } else {
-      // erase
-      greetingEl.textContent = current.slice(0, charIndex - 1);
-      charIndex--;
-      if (charIndex <= 0) {
-        typing = true;
-        greetIndex = (greetIndex + 1) % greetings.length;
-        setTimeout(typeGreeting, 300);
-        return;
-      }
-      setTimeout(typeGreeting, 80);
-    }
+    greetIndex = (greetIndex + 1) % greetings.length;
+    greetingEl.textContent = greetings[greetIndex];
+    greetingEl.classList.add('flash');
+    setTimeout(() => greetingEl.classList.remove('flash'), 900);
   }
-  // start typing
-  typeGreeting();
+  // rotate every 3 seconds
+  setInterval(rotateGreeting, 3000);
 
-  // Detect when topbar visually overlaps sections and add a blur to those sections
-  const topbar = document.querySelector('.topbar');
-  const sections = document.querySelectorAll('section');
+  // Expand/collapse project details when short description clicked or activated
+  function toggleProjectDetails(el) {
+    const details = el.parentElement.querySelector('.project-details');
+    const short = el;
+    if (!details) return;
+    const isOpen = details.classList.toggle('open');
+    details.setAttribute('aria-hidden', String(!isOpen));
+    short.setAttribute('aria-expanded', String(isOpen));
+  }
 
-  function checkOverlap() {
-    if (!topbar) return;
-    const topbarRect = topbar.getBoundingClientRect();
-    sections.forEach(sec => {
-      const rect = sec.getBoundingClientRect();
-      const overlap = !(rect.bottom < topbarRect.top || rect.top > topbarRect.bottom || rect.right < topbarRect.left || rect.left > topbarRect.right);
-      if (overlap) sec.classList.add('section-blur'); else sec.classList.remove('section-blur');
+  document.querySelectorAll('.project-short').forEach(short => {
+    short.addEventListener('click', () => toggleProjectDetails(short));
+    short.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleProjectDetails(short);
+      }
+    });
+  });
+
+  // Hook up project-download links: if data-file attr set, update href
+  document.querySelectorAll('.project-download').forEach(link => {
+    const file = link.dataset.file;
+    if (file) link.href = file;
+  });
+
+  // Skills visual: staggered entrance animation
+  const skillsGrid = document.querySelector('.skills-visual-grid');
+  if (skillsGrid) {
+    const bubbles = Array.from(skillsGrid.querySelectorAll('.skill-bubble'));
+    bubbles.forEach((b, i) => {
+      b.style.setProperty('--i', i);
+      b.dataset.index = i;
+    });
+    // small timeout to allow CSS transition
+    setTimeout(() => skillsGrid.classList.add('loaded'), 120);
+  }
+
+  // Reveal skillicons image with shimmer and small parallax effect
+  const skillsWrap = document.querySelector('.skillsicons-wrap');
+  const skillsImg = document.querySelector('.skillsicons-img');
+  if (skillsWrap && skillsImg) {
+    const reveal = () => {
+      skillsWrap.classList.add('revealed');
+      // remove observer after reveal
+      if (observer) observer.disconnect();
+    };
+
+    // reveal on intersection
+    const imgObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) reveal(); });
+    }, { threshold: 0.2 });
+    imgObserver.observe(skillsWrap);
+
+    // mouse parallax
+    skillsWrap.addEventListener('mousemove', (e) => {
+      const rect = skillsWrap.getBoundingClientRect();
+      const dx = (e.clientX - rect.left) / rect.width - 0.5; // -0.5..0.5
+      const dy = (e.clientY - rect.top) / rect.height - 0.5;
+      skillsImg.style.transform = `translate3d(${dx * 8}px, ${dy * 6}px, 0) scale(1.02)`;
+    });
+    skillsWrap.addEventListener('mouseleave', () => {
+      skillsImg.style.transform = '';
     });
   }
-
-  // Throttle overlap checks for performance
-  let overlapTimeout;
-  window.addEventListener('scroll', () => {
-    if (overlapTimeout) cancelAnimationFrame(overlapTimeout);
-    overlapTimeout = requestAnimationFrame(checkOverlap);
-  }, { passive: true });
-
-  // Run initially
-  checkOverlap();
 
   // Resume download fallback: if resume file missing, disable link gracefully
   const resumeLink = document.getElementById('download-resume');
@@ -242,8 +264,57 @@ document.addEventListener('DOMContentLoaded', () => {
       // Optionally we could check via fetch and warn, but keeping it simple.
     });
   }
-});
 
+  // Video modal open/close handlers
+  const videoModal = document.getElementById('video-modal');
+  const videoIframe = document.getElementById('video-iframe');
+  const openVideoBtns = document.querySelectorAll('.open-video-btn');
+
+  function openVideo(url) {
+    if (!videoModal || !videoIframe) return;
+    // set src lazily to avoid loading before user interaction
+    videoIframe.src = url;
+    videoModal.classList.add('open');
+    videoModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    // Move focus into modal for accessibility
+    const closeBtn = videoModal.querySelector('.video-modal-close');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeVideo() {
+    if (!videoModal || !videoIframe) return;
+    videoModal.classList.remove('open');
+    videoModal.setAttribute('aria-hidden', 'true');
+    // remove src to stop playback and free resources
+    videoIframe.src = '';
+    document.body.style.overflow = '';
+  }
+
+  openVideoBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const url = btn.getAttribute('data-video-src');
+      if (url) openVideo(url);
+    });
+  });
+
+  // close on elements with [data-close] (backdrop and close button)
+  if (videoModal) {
+    videoModal.addEventListener('click', (e) => {
+      if (e.target && e.target.hasAttribute && e.target.hasAttribute('data-close')) {
+        closeVideo();
+      }
+    });
+  }
+
+  // close on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && videoModal && videoModal.classList.contains('open')) {
+      closeVideo();
+    }
+  });
+
+});
 // Performance optimization: debounce scroll events
 function debounce(func, wait) {
   let timeout;

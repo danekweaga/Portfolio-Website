@@ -17,15 +17,11 @@ body {
   overflow-x: hidden;
 }
 
-/* ensure page content doesn't sit under the fixed topbar */
-body {
-  padding-top: calc(var(--topbar-height, 72px) + 0.75rem);
-}
-
 /* Logo Styles */
 .logo {
-  /* default logo styles; when placed inside .topbar it will be overridden */
-  position: relative;
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
   z-index: 1000;
   height: 150px;
   width: auto;
@@ -43,11 +39,12 @@ body {
 
 /* Clock in top-left - match logo sizing */
 .clock {
-  /* default clock styles; inside topbar will be positioned relatively */
-  position: relative;
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
   z-index: 1000;
-  height: auto;
-  min-width: 90px;
+  height: 150px;
+  min-width: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,18 +62,17 @@ body {
 
 /* Topbar containing logo, greeting, and clock */
 .topbar {
-  --topbar-height: 72px;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--topbar-height);
+  top: 0.75rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   z-index: 1001;
-  pointer-events: auto;
+  pointer-events: none; /* keep topbar decorative; inner interactive elements can override */
 }
 
 .topbar .logo, .topbar .clock {
@@ -104,46 +100,80 @@ body {
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* translucent backdrop to blur content beneath the topbar */
-.topbar {
-  background: rgba(12, 18, 28, 0.35);
-  backdrop-filter: blur(8px) saturate(120%);
-  border-radius: 0;
-  padding: 0 1.25rem;
-}
-
-/* when topbar overlaps a section, apply extra subtle blur to that section */
-.section-blur {
-  filter: blur(4px) saturate(85%);
-  transition: filter 220ms ease;
-}
-
-/* Ensure logo and clock sit inside the topbar rather than fixed elsewhere */
-.topbar .logo {
-  position: relative;
-  height: calc(var(--topbar-height) - 12px);
-  display: flex;
+/* Visual skills grid (placeholder for skillsicon.dev) */
+.skills-visual-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 1rem;
+  max-width: 1000px;
+  margin: 1.5rem auto;
   align-items: center;
+  justify-items: center;
 }
 
-.topbar .logo img {
-  height: 100%;
-  width: auto;
-}
-
-.topbar .clock {
-  position: relative;
-  min-width: 90px;
-  text-align: right;
-  font-size: 1rem;
+.skill-bubble {
+  width: 92px;
+  height: 92px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   color: #e6eef8;
   font-weight: 600;
+  transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms;
+  cursor: default;
+  box-shadow: 0 6px 18px rgba(4,13,30,0.35);
 }
 
-/* keep page content from being hidden under the topbar */
-main, section, body > section, header {
-  margin-top: calc(var(--topbar-height) + 0.75rem);
+.skill-bubble:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 14px 30px rgba(4,13,30,0.6);
 }
+
+/* subtle staggered entrance */
+.skills-visual-grid .skill-bubble { opacity: 0; transform: translateY(12px); }
+.skills-visual-grid.loaded .skill-bubble { opacity: 1; transform: translateY(0); }
+.skills-visual-grid .skill-bubble[data-index] { transition-delay: calc(var(--i) * 80ms); }
+
+/* Skillicons.dev embed image styling */
+.skillsicons-wrap {
+  max-width: 900px;
+  margin: 1.2rem auto 0 auto;
+  text-align: center;
+}
+.skillsicons-img {
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  display: inline-block;
+  filter: drop-shadow(0 8px 24px rgba(4,13,30,0.45));
+}
+
+/* Entrance + hover animations */
+.skillsicons-img {
+  opacity: 0;
+  transform: translateY(8px) scale(1);
+  transition: transform 320ms cubic-bezier(.2,.9,.2,1), opacity 420ms ease, filter 240ms ease;
+}
+.skillsicons-wrap.revealed .skillsicons-img { opacity: 1; transform: translateY(0) scale(1); }
+.skillsicons-img:hover { transform: translateY(-6px) scale(1.02); filter: drop-shadow(0 18px 42px rgba(4,13,30,0.6)); }
+
+/* shimmer overlay using pseudo-element */
+.skillsicons-wrap { position: relative; }
+.skillsicons-wrap::after {
+  content: '';
+  position: absolute;
+  left: -30%;
+  top: 0;
+  height: 100%;
+  width: 30%;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0) 100%);
+  transform: translateX(-100%);
+  pointer-events: none;
+  transition: transform 1.6s ease;
+  opacity: 0.9;
+}
+.skillsicons-wrap.revealed::after { transform: translateX(220%); transition: transform 1.6s ease; }
 
 /* Header */
 header {
@@ -396,6 +426,121 @@ section p {
   transform: translateX(-30px);
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
+}
+
+/* Expandable project details */
+.project-short {
+  cursor: pointer;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  display: inline-block;
+  transition: transform 180ms ease, background 200ms ease;
+}
+.project-short:focus, .project-short:hover {
+  transform: translateY(-4px);
+  background: linear-gradient(180deg, rgba(58,141,255,0.06), rgba(58,141,255,0.02));
+}
+
+.project-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 360ms cubic-bezier(0.16, 1, 0.3, 1), padding 240ms ease;
+  margin-top: 0.6rem;
+}
+.project-details.open {
+  max-height: 400px; /* generous height for content */
+  padding: 0.8rem 0.6rem 0.6rem 0.6rem;
+}
+.project-details-inner {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 1rem;
+  border-radius: 8px;
+}
+.project-download {
+  display: inline-block;
+  margin-top: 0.6rem;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+}
+
+/* Project media (responsive iframe) */
+.project-media {
+  margin-top: 0.8rem;
+}
+.project-media iframe {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.media-caption {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: rgba(230,238,248,0.9);
+}
+
+/* Video modal */
+.video-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+}
+.video-modal.open {
+  display: flex;
+}
+.video-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(3px);
+}
+.video-modal-content {
+  position: relative;
+  max-width: 96vw;
+  width: min(1100px, 95%);
+  background: #0b0b0b;
+  padding: 0.6rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  z-index: 2;
+}
+.video-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+.video-iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 6px;
+}
+.video-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  z-index: 3;
+  background: transparent;
+  color: #fff;
+  border: 0;
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.video-modal-close:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
 }
 
 .project::before, .job::before, .volunteer::before, .leadership::before {

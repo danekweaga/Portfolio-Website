@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chukwunonso Daniel Ekweaga | Portfolio</title>
+  <title>Chukwunonso Daniel Ekweaga</title>
+  <!-- Favicon / site icon -->
+  <link rel="icon" type="image/png" href="nonso.png">
+  <link rel="apple-touch-icon" href="nonso.png">
+  <meta name="theme-color" content="#0b0b0b">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -41,7 +45,7 @@
     <nav>
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
-  <a href="#experience">Experience</a>
+<!--  <a href="#experience">Experience</a>!-->
   <a href="resume.pdf" download id="download-resume">Resume</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -57,27 +61,66 @@
       <p><strong>Tools:</strong> Git, VS Code, IntelliJ IDEA, Linux</p>
       <p><strong>Concepts:</strong> OOP, Data Structures, Algorithms</p>
 
-  <!-- skill icons removed by user request -->
+      <!-- Skills icons (skillicons.dev) -->
+      <div class="skillsicons-wrap">
+        <img class="skillsicons-img" src="https://skillicons.dev/icons?i=js,html,css,java,python,mysql,c,git,vscode,linux" alt="Skills icons">
+      </div>
     </div>
   </section>
+  
 
   <section id="projects" class="fade-in">
     <h2>Projects</h2>
     <div class="project slide-in">
       <h3>Polynomial Calculator</h3>
-      <p>GUI-based calculator in JavaFX capable of solving polynomials up to the 3rd degree.</p>
+      <p class="project-short" tabindex="0" role="button" aria-expa
+      nded="false">GUI-based calculator in JavaFX capable of solving polynomials up to the 3rd degree.</p>
+      <div class="project-details" aria-hidden="true">
+        <div class="project-details-inner">
+          <p class="project-long">The Polynomial Calculator is a sleek JavaFX app by Chukwunonso Daniel Ekweaga for solving and graphing linear, quadratic, and cubic equations. Featuring a modern dark UI, custom keypad, quick polynomial buttons, and a graph viewer, it makes equation input and visualization simple. 
+            Powered by a reliable MathLogic engine, it ensures accurate results with a stylish, responsive design that runs smoothly in any Java IDE or BlueJ.</p>
+          <a class="project-download" href="https://github.com/danekweaga/Polynomial-Calculator/tree/main" target="_blank" rel="noopener" data-file="">GitHub</a>
+        </div>
+      </div>
     </div>
     <div class="project slide-in">
       <h3>University Library Database</h3>
-      <p>Command-line application using Java and SQL for managing library records with CRUD operations.</p>
+      <p class="project-short" tabindex="0" role="button" aria-expanded="false">Command-line application using Java and SQL for managing library records with CRUD operations.</p>
+      <div class="project-details" aria-hidden="true">
+        <div class="project-details-inner">
+          <p class="project-long">The University Library Management System is a command-line Java application built with MySQL to streamline how libraries manage books, users, borrowing, and fines. 
+            Developed as a collaborative project, it allows administrators to add and update books, register students and faculty, track borrowing and returns, 
+            and automatically calculate overdue fines. With efficient search and reporting features, the system provides a reliable way to organize resources and maintain accurate records, all while demonstrating strong database integration through JDBC.
+</p>
+          <a class="project-download" href="https://github.com/danekweaga/Database-Project" target="_blank" rel="noopener" data-file="">GitHub</a>
+        </div>
+      </div>
     </div>
     <div class="project slide-in">
       <h3>Game Giveaway Tool</h3>
-      <p>Desktop JavaFX application for streamers to conduct giveaways, using randomized algorithms.</p>
+      <p class="project-short" tabindex="0" role="button" aria-expanded="false">Desktop JavaFX application for streamers to conduct giveaways, using randomized algorithms.</p>
+      <div class="project-details" aria-hidden="true">
+        <div class="project-details-inner">
+          <p class="project-long">Nana's Crossing is a fun Java game where you help a grandmother cross a busy 8-lane highway. 
+            Each lane you cross earns money, but it gets riskier as you go - starting at 10% chance of getting hit and rising to 31%. The challenge is deciding when to cash out your winnings or risk it all for the big payout. 
+            Built with JavaFX, it features smooth animations, sound effects, and an easy-to-use interface perfect for streaming to an audience.</p>
+          <div class="project-media">
+            <button class="open-video-btn" data-video-src="https://unbcloud-my.sharepoint.com/personal/n3r9a_unb_ca/_layouts/15/embed.aspx?UniqueId=923648f0-1b58-4f9f-9864-14e266294dac&nav=%7B%22playbackOptions%22%3A%7B%22startTimeInSeconds%22%3A0%7D%7D&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create">Watch Video</button>
+            <p class="media-caption">Nana's Crossing - gameplay & guide</p>
+          </div>
+          <a class="project-download" href="https://github.com/danekweaga/New-Updated-Nana-Crossing" target="_blank" rel="noopener" data-file="" download>Github</a>
+        </div>
+      </div>
     </div>
     <div class="project slide-in">
       <h3>Business Website for a Moving Company</h3>
-      <p>Responsive website built with HTML5, CSS3, and JavaScript. Includes a contact form and cross-browser testing.</p>
+      <p class="project-short" tabindex="0" role="button" aria-expanded="false">Responsive website built with HTML5, CSS3, and JavaScript. Includes a contact form and cross-browser testing.</p>
+      <div class="project-details" aria-hidden="true">
+        <div class="project-details-inner">
+          <p class="project-long">(Write your extended description here.)</p>
+          <a class="project-download" href="#" data-file="" download>Download</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -122,5 +165,15 @@
   </footer>
 
   <script src="script.js"></script>
+  <!-- Video modal (opens when user clicks Watch Video) -->
+  <div id="video-modal" class="video-modal" aria-hidden="true">
+    <div class="video-modal-backdrop" data-close></div>
+    <div class="video-modal-content" role="dialog" aria-modal="true" aria-label="Video player">
+      <button class="video-modal-close" aria-label="Close video" data-close>&times;</button>
+      <div class="video-wrapper">
+        <iframe id="video-iframe" class="video-iframe" src="" frameborder="0" allowfullscreen title="Embedded video"></iframe>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
