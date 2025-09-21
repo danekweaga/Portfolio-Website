@@ -234,8 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (skillsWrap && skillsImg) {
     const reveal = () => {
       skillsWrap.classList.add('revealed');
-      // remove observer after reveal
-      if (observer) observer.disconnect();
+      // remove only the image observer after reveal so we don't stop the global observer
+      try { if (imgObserver) imgObserver.disconnect(); } catch (e) { /* ignore if not defined */ }
     };
 
     // reveal on intersection
