@@ -945,12 +945,18 @@ footer {
     will-change: transform, opacity !important;
   }
 
-  /* Ensure project details can fully expand on mobile (avoid clipping) */
-  .project-details, .project-details.open {
+  /* Allow project details to expand on mobile only when opened; don't force closed state */
+  .project-details.open {
     overflow: visible !important;
-    max-height: 2000px !important; /* large safe value so content isn't clipped */
+    max-height: 2000px !important; /* large safe value so content isn't clipped when open */
     transition: none !important; /* avoid transition jank when opening */
     padding: 0.8rem 0.6rem 0.6rem 0.6rem !important;
+  }
+
+  /* Ensure contact buttons are visible on mobile (initial animations are disabled) */
+  .links a {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   /* Some parent/backdrop elements still used backdrop-filter; turn them off on mobile */
