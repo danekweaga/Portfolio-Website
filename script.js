@@ -29,6 +29,12 @@ const observer = new IntersectionObserver((entries) => {
 
 // Initialize animations when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+  // Touch-detection: add `.no-fancy-ui` for devices with touch support
+  try {
+    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+    if (isTouch) document.documentElement.classList.add('no-fancy-ui');
+  } catch (e) { /* ignore */ }
+
   // Update footer with current year
   const currentYear = new Date().getFullYear();
   const footerText = document.querySelector('footer p');
