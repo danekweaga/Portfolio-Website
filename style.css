@@ -58,6 +58,20 @@ body {
 /* Resume download link - match nav look */
 #download-resume {
   display: inline-block;
+  color: #fff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  padding: 8px 12px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.12);
+  text-decoration: none;
+  font-weight: 500;
+  transition: transform 140ms ease, background 140ms ease, box-shadow 120ms ease;
+}
+
+#download-resume:hover, #download-resume:focus {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
 }
 
 /* Topbar containing logo, greeting, and clock */
@@ -326,6 +340,8 @@ nav a, .topbar-links a {
   .topbar-links { gap: 0.4rem; }
   nav { margin-top: 1rem; }
   nav a { padding: 0.5rem 1rem; font-size: 0.95rem; }
+  /* Make resume slightly smaller on mobile while keeping pill feel */
+  #download-resume { padding: 6px 10px; font-size: 0.92rem; border-radius: 18px; }
 }
 
 /* Floating geometric shapes */
