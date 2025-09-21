@@ -895,3 +895,53 @@ footer {
     border-color: #fff;
   }
 }
+
+/* Additional mobile-safe overrides: reduce repaint-heavy styles and neutralize tap/hover inversion */
+@media (max-width: 700px) {
+  /* Turn off backdrop-filter on mobile for nav/buttons to avoid expensive repaints */
+  nav a, #download-resume, .links a, .topbar-links a, .video-modal-content {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Keep transitions cheap and predictable on touch devices */
+  nav a, #download-resume, .links a, .topbar-links a {
+    transition: background-color 120ms linear, color 120ms linear !important;
+    will-change: auto !important;
+    animation: none !important;
+  }
+
+  /* Avoid stark inversion on press/hover; keep subtle translucent feedback */
+  nav a:hover, nav a:active, nav a:focus,
+  #download-resume:hover, #download-resume:active, #download-resume:focus,
+  .links a:hover, .links a:active, .links a:focus {
+    background-color: rgba(255,255,255,0.06) !important;
+    color: #fff !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Explicitly silence OS tap highlight */
+  nav a, #download-resume, .links a, .topbar-links a, button {
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+    tap-highlight-color: rgba(0,0,0,0) !important;
+    touch-action: manipulation !important;
+  }
+
+  /* Disable pseudo-element ripple / big radial effects on small screens */
+  .links a::before, nav a::before, #download-resume::before {
+    transition: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+  }
+
+  /* Ensure nav buttons are composited on their own layer to reduce flicker */
+  nav a, #download-resume, .links a {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform, opacity !important;
+  }
+}
