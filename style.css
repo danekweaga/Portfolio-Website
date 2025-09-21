@@ -862,6 +862,12 @@ footer {
     justify-content: center;
     gap: 1rem;
   }
+
+  /* Ensure contact buttons are visible at this breakpoint too */
+  .links a {
+    opacity: 1 !important;
+    transform: none !important;
+  }
   
   section {
     padding: 4rem 1rem;
