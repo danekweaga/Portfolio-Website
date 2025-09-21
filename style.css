@@ -55,24 +55,8 @@ body {
   background: transparent;
 }
 
-/* Resume download link - match nav look */
-#download-resume {
-  display: inline-block;
-  color: #fff;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-  padding: 8px 12px;
-  border-radius: 24px;
-  border: 1px solid rgba(255,255,255,0.12);
-  text-decoration: none;
-  font-weight: 500;
-  transition: transform 140ms ease, background 140ms ease, box-shadow 120ms ease;
-}
-
-#download-resume:hover, #download-resume:focus {
-  transform: translateY(-2px);
-  background: rgba(255,255,255,0.08);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-}
+/* Resume download link - unified with nav styles below */
+/* Styles for `#download-resume` are handled together with `nav a` further down to ensure consistent appearance */
 
 /* Topbar containing logo, greeting, and clock */
 .topbar {
@@ -306,10 +290,69 @@ nav a:hover {
   transform: translateY(-2px);
 }
 
+/* Unified navbar button styles (applies to main nav links and the resume button) */
+nav a, #download-resume {
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.45rem 1.1rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  transition: transform 140ms ease, background 140ms ease, box-shadow 120ms ease;
+  backdrop-filter: blur(10px);
+}
+
+nav a:hover, #download-resume:hover, nav a:focus, #download-resume:focus {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  color: #000;
+}
+
 /* Prevent harsh tap highlights on mobile (removes the default flash) */
 nav a, .topbar-links a {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   touch-action: manipulation;
+}
+
+/* Make interactive elements avoid inverting to full white on touch/active states */
+button, a, .project-short, .project-download, .links a, #download-resume {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Subtle active state that doesn't invert colors strongly */
+button:active, a:active, .project-short:active, .project-download:active, #download-resume:active, .links a:active {
+  transform: translateY(0);
+  background-color: rgba(255,255,255,0.04);
+  color: inherit; /* avoid switching to black text */
+  box-shadow: none;
+}
+
+/* Avoid heavy :hover inversion on small screens (touch devices) */
+@media (max-width: 700px) {
+  nav a:hover, nav a:active, nav a:focus, .links a:hover, .links a:active, .links a:focus {
+    background-color: rgba(255,255,255,0.06);
+    color: #fff; /* keep text white to avoid stark contrast */
+    transform: none !important;
+  }
+
+  /* Make sure the large white background animation doesn't trigger on scroll/tap */
+  .links a::before { transition: none; }
+
+  /* Slightly reduce the backdrop brightness for active state */
+  #download-resume:active {
+    background: rgba(255,255,255,0.04);
+    box-shadow: none;
+  }
+
+  /* Ensure project-short doesn't jump during scroll/tap */
+  .project-short:active, .project-short:focus {
+    transform: none;
+  }
 }
 
 /* Make touch interactions subtle: no transform/white inversion on small screens */
