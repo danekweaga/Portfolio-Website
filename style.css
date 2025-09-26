@@ -749,6 +749,15 @@ section p {
   gap: 8px;
 }
 
+/* Contact icons (from skillicons.dev) */
+.contact-icon {
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.35));
+}
+
 .links a::before {
   content: '';
   position: absolute;
