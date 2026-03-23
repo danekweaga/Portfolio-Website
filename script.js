@@ -247,6 +247,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Projects pagination: toggle visible project cards by page number
+  const projectCards = Array.from(document.querySelectorAll('#projects .project[data-project-page]'));
+  const pageButtons = Array.from(document.querySelectorAll('[data-project-page-btn]'));
+
+  function setProjectPage(page) {
+    projectCards.forEach(card => {
+      const isActivePage = card.dataset.projectPage === page;
+      card.classList.toggle('project-page-hidden', !isActivePage);
+      card.hidden = !isActivePage;
+
+      if (!isActivePage) {
+        const details = card.querySelector('.project-details');
+        const shortDesc = card.querySelector('.project-short');
+        if (details) {
+          details.classList.remove('open');
+          details.setAttribute('aria-hidden', 'true');
+        }
+        if (shortDesc) shortDesc.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    pageButtons.forEach(btn => {
+      const isCurrent = btn.dataset.projectPageBtn === page;
+      btn.classList.toggle('active', isCurrent);
+      btn.setAttribute('aria-selected', String(isCurrent));
+    });
+  }
+
+  if (projectCards.length && pageButtons.length) {
+    pageButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        setProjectPage(btn.dataset.projectPageBtn);
+      });
+    });
+    setProjectPage('1');
+  }
+
   // Hook up project-download links: if data-file attr set, update href
   document.querySelectorAll('.project-download').forEach(link => {
     const file = link.dataset.file;

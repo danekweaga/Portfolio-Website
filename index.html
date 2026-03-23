@@ -56,7 +56,7 @@
 
   <section id="about" class="fade-in">
     <h2>About Me</h2>
-    <p>I am a Computer Science student at the University of New Brunswick (Class of 2028) with a strong foundation in programming, web development, and problem solving. I enjoy creating meaningful software, from responsive websites to robust applications, with a focus on clean and efficient design.</p>
+    <p>I am an Applied Computer Science student at Dalhousie Univerity with a strong foundation in programming, web development, and problem solving. I enjoy creating meaningful software, from responsive websites to robust applications, with a focus on clean and efficient design.</p>
     <div class="skills">
       <h3>Skills</h3>
       <p><strong>Languages:</strong> Java, Python, SQL, C</p>
@@ -74,7 +74,50 @@
 
   <section id="projects" class="fade-in">
     <h2>Projects</h2>
-    <div class="project slide-in">
+    <div class="projects-pagination" role="tablist" aria-label="Project pages">
+      <button class="projects-page-btn active" data-project-page-btn="1" role="tab" aria-selected="true">Page 1</button>
+      <button class="projects-page-btn" data-project-page-btn="2" role="tab" aria-selected="false">Page 2</button>
+    </div>
+
+    <div class="project slide-in" data-project-page="1">
+      <h3>Kairos — Real-Time Focus & Decision System</h3>
+      <p class="project-short" tabindex="0" role="button" aria-expanded="false">Web app for ranking tasks by impact, matching work to energy, and preventing burnout.</p>
+      <div class="project-details" aria-hidden="true">
+        <div class="project-details-inner">
+          <p class="project-long">Kairos helps users prioritize high-ROI tasks, run checkpoint-based focus sessions, and adapt breaks in real time. It includes session persistence and recovery, plus secure auth/profile flows. Built with React (TypeScript), shadcn/ui, Tailwind CSS, Supabase, LocalStorage, and deployed on Vercel.</p>
+          <a class="project-download" href="https://kairos-six-inky.vercel.app" target="_blank" rel="noopener" data-file="">Live Demo</a>
+          <a class="project-download" href="https://github.com/danekweaga/kairos" target="_blank" rel="noopener" data-file="">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project slide-in" data-project-page="1">
+      <h3>UniGuide AI — Student Resource Chatbot</h3>
+      <p class="project-short" tabindex="0" role="button" aria-expanded="false">Hackathon chatbot that helps students find trusted support resources in seconds.</p>
+      <div class="project-details" aria-hidden="true">
+        <div class="project-details-inner">
+          <p class="project-long">UniGuide AI lets students describe their situation in plain language, then returns relevant support links from university, government, and local services. I helped prototype the chat flow, shape response clarity, and present the solution during the final pitch.</p>
+          <a class="project-download" href="https://github.com/UniGuide-AI/main" target="_blank" rel="noopener" data-file="">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project slide-in" data-project-page="1">
+      <h3>Ojuju — Global Game Jam 2026</h3>
+      <p class="project-short" tabindex="0" role="button" aria-expanded="false">2D Unity platformer where unlockable masks change how players solve each level.</p>
+      <div class="project-details" aria-hidden="true">
+        <div class="project-details-inner">
+          <p class="project-long">Built during Global Game Jam 2026, Ojuju features mask-based abilities like platform freeze, enhanced jumps, and temporary invincibility. I contributed to gameplay implementation, rapid testing, and polish across desktop and mobile builds under a tight deadline.</p>
+          <div class="project-media">
+            <button class="open-video-btn" data-video-src="https://www.youtube.com/embed/p0ML6xX6aCY">Watch Video</button>
+            <p class="media-caption">Ojuju - gameplay demo</p>
+          </div>
+          <a class="project-download" href="https://github.com/Emmanuel27121/Game_Jam_2026" target="_blank" rel="noopener" data-file="">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project slide-in" data-project-page="2">
       <h3>Polynomial Calculator</h3>
   <p class="project-short" tabindex="0" role="button" aria-expanded="false">GUI-based calculator in JavaFX capable of solving polynomials up to the 3rd degree.</p>
       <div class="project-details" aria-hidden="true">
@@ -85,7 +128,8 @@
         </div>
       </div>
     </div>
-    <div class="project slide-in">
+
+    <div class="project slide-in" data-project-page="2">
       <h3>University Library Database</h3>
       <p class="project-short" tabindex="0" role="button" aria-expanded="false">Command-line application using Java and SQL for managing library records with CRUD operations.</p>
       <div class="project-details" aria-hidden="true">
@@ -98,7 +142,8 @@
         </div>
       </div>
     </div>
-    <div class="project slide-in">
+
+    <div class="project slide-in" data-project-page="2">
       <h3>Game Giveaway Tool</h3>
       <p class="project-short" tabindex="0" role="button" aria-expanded="false">Desktop JavaFX application for streamers to conduct giveaways, using randomized algorithms.</p>
       <div class="project-details" aria-hidden="true">
@@ -107,14 +152,15 @@
             Each lane you cross earns money, but it gets riskier as you go - starting at 10% chance of getting hit and rising to 31%. The challenge is deciding when to cash out your winnings or risk it all for the big payout. 
             Built with JavaFX, it features smooth animations, sound effects, and an easy-to-use interface perfect for streaming to an audience.</p>
           <div class="project-media">
-            <button class="open-video-btn" data-video-src="https://www.youtube.com/embed/TQymY1GnweA?si=K-OEld5gvgU44H7H">Watch Video</button>
+            <button class="open-video-btn" data-video-src="https://www.youtube.com/embed/p0ML6xX6aCY">Watch Video</button>
             <p class="media-caption">Nana's Crossing - gameplay & guide</p>
           </div>
           <a class="project-download" href="https://github.com/danekweaga/New-Updated-Nana-Crossing" target="_blank" rel="noopener" data-file="" download>Github</a>
         </div>
       </div>
     </div>
-    <div class="project slide-in">
+
+    <div class="project slide-in" data-project-page="2">
       <h3>Business Website for a Moving Company</h3>
       <p class="project-short" tabindex="0" role="button" aria-expanded="false">Responsive website built with HTML5, CSS3, and JavaScript. Includes a contact form and cross-browser testing.</p>
       <div class="project-details" aria-hidden="true">
@@ -124,7 +170,8 @@
         </div>
       </div>
     </div>
-    <div class="project slide-in">
+
+    <div class="project slide-in" data-project-page="2">
       <h3>Data Structures Portfolio</h3>
       <p class="project-short" tabindex="0" role="button" aria-expanded="false">Collection of fundamental data structure implementations in C and Java (linked lists, stacks, queues, BSTs, and more).</p>
       <div class="project-details" aria-hidden="true">
