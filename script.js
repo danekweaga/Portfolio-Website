@@ -145,25 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Mouse movement parallax effect
-  document.addEventListener('mousemove', (e) => {
-    const mouseX = e.clientX / window.innerWidth;
-    const mouseY = e.clientY / window.innerHeight;
-    
-    const projects = document.querySelectorAll('.project, .job, .volunteer, .leadership');
-    projects.forEach((project, index) => {
-      const speed = (index % 2 === 0) ? 0.5 : -0.5;
-      const x = (mouseX - 0.5) * speed;
-      const y = (mouseY - 0.5) * speed;
-      
-      if (project.classList.contains('visible')) {
-        project.style.transform = `translateX(${x}px) translateY(${y}px)`;
-      }
-    });
-  });
+  // Keep project cards stable while switching pages (remove pointer parallax jitter)
   
   // Enhanced hover effects for interactive elements
-  const interactiveElements = document.querySelectorAll('nav a, .links a, .project, .job, .volunteer, .leadership');
+  const interactiveElements = document.querySelectorAll('nav a, .links a, .job, .volunteer, .leadership');
   
   interactiveElements.forEach(element => {
     element.addEventListener('mouseenter', () => {
@@ -251,11 +236,47 @@ document.addEventListener('DOMContentLoaded', () => {
   const projectCards = Array.from(document.querySelectorAll('#projects .project[data-project-page]'));
   const pageButtons = Array.from(document.querySelectorAll('[data-project-page-btn]'));
 
-  function setProjectPage(page) {
+  const PROJECT_PAGE_FADE_MS = 180;
+  let currentProjectPage = '1';
+  let pageSwitchToken = 0;
+
+  function setProjectPage(page, options = {}) {
+    const { immediate = false } = options;
+    if (!immediate && page === currentProjectPage) return;
+
+    pageSwitchToken += 1;
+    const activeToken = pageSwitchToken;
+
     projectCards.forEach(card => {
       const isActivePage = card.dataset.projectPage === page;
-      card.classList.toggle('project-page-hidden', !isActivePage);
-      card.hidden = !isActivePage;
+
+      if (isActivePage) {
+        card.hidden = false;
+        card.classList.remove('project-page-hidden', 'project-page-fading-out');
+        if (immediate) {
+          card.classList.remove('project-page-fading-in');
+        } else {
+          card.classList.add('project-page-fading-in');
+          requestAnimationFrame(() => {
+            if (activeToken === pageSwitchToken) {
+              card.classList.remove('project-page-fading-in');
+            }
+          });
+        }
+      } else if (immediate) {
+        card.classList.add('project-page-hidden');
+        card.classList.remove('project-page-fading-in', 'project-page-fading-out');
+        card.hidden = true;
+      } else {
+        card.classList.remove('project-page-fading-in');
+        card.classList.add('project-page-fading-out');
+        window.setTimeout(() => {
+          if (activeToken !== pageSwitchToken) return;
+          card.classList.add('project-page-hidden');
+          card.classList.remove('project-page-fading-out');
+          card.hidden = true;
+        }, PROJECT_PAGE_FADE_MS);
+      }
 
       if (!isActivePage) {
         const details = card.querySelector('.project-details');
@@ -273,6 +294,8 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.toggle('active', isCurrent);
       btn.setAttribute('aria-selected', String(isCurrent));
     });
+
+    currentProjectPage = page;
   }
 
   if (projectCards.length && pageButtons.length) {
@@ -281,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setProjectPage(btn.dataset.projectPageBtn);
       });
     });
-    setProjectPage('1');
+    setProjectPage('1', { immediate: true });
   }
 
   // Hook up project-download links: if data-file attr set, update href
