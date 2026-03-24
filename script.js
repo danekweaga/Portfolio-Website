@@ -29,10 +29,12 @@ const observer = new IntersectionObserver((entries) => {
 
 // Initialize animations when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+  let isTouchDevice = false;
+
   // Touch-detection: add `.no-fancy-ui` for devices with touch support
   try {
-    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
-    if (isTouch) document.documentElement.classList.add('no-fancy-ui');
+    isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+    if (isTouchDevice) document.documentElement.classList.add('no-fancy-ui');
   } catch (e) { /* ignore */ }
 
   // Update footer with current year
@@ -113,16 +115,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // Enhanced scroll effects
   let lastScrollTop = 0;
   const header = document.querySelector('header');
+  const mobileParallaxQuery = window.matchMedia('(max-width: 900px)');
+  const shouldUseHeaderParallax = () => Boolean(header) && !isTouchDevice && !mobileParallaxQuery.matches;
   
   window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollPercent = scrollTop / (document.documentElement.scrollHeight - window.innerHeight);
     
     // Parallax effect on header
-    if (scrollTop < window.innerHeight) {
+    if (shouldUseHeaderParallax() && scrollTop < window.innerHeight) {
       const translateY = scrollTop * 0.5;
       header.style.transform = `translateY(${translateY}px)`;
       header.style.opacity = 1 - (scrollTop / window.innerHeight) * 0.8;
+    } else if (header) {
+      // Keep header static on touch/mobile devices to prevent top-of-page jitter.
+      header.style.transform = '';
+      header.style.opacity = '';
     }
     
     // Text animation on scroll
