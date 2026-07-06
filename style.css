@@ -311,6 +311,20 @@ nav a:hover, #download-resume:hover, nav a:focus, #download-resume:focus {
   color: #000;
 }
 
+#download-resume.resume-note {
+  cursor: default;
+  opacity: 0.72;
+  font-size: 0.92rem;
+}
+
+#download-resume.resume-note:hover,
+#download-resume.resume-note:focus {
+  transform: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  box-shadow: none;
+  color: #fff;
+}
+
 /* Prevent harsh tap highlights on mobile (removes the default flash) */
 nav a, .topbar-links a {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -1091,6 +1105,12 @@ footer {
   color: #fff !important;
   text-decoration: none !important;
   transform: none !important;
+}
+
+.no-fancy-ui #download-resume.resume-note:hover,
+.no-fancy-ui #download-resume.resume-note:active,
+.no-fancy-ui #download-resume.resume-note:focus {
+  background-color: transparent !important;
 }
 
 .no-fancy-ui .links a {
