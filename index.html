@@ -3,267 +3,569 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chukwunonso Daniel Ekweaga</title>
-  <!-- Favicon / site icon -->
+  <title>Nonso Ekweaga | Full-Stack, AI & Cloud Developer</title>
+  <meta name="description" content="Portfolio of Nonso Ekweaga, a Dalhousie Applied Computer Science student building full-stack, AI, cloud and data applications with TypeScript, Python, PostgreSQL, AWS and Azure.">
+  <meta name="keywords" content="software engineer, full-stack developer, AI developer, cloud engineer, portfolio, Nonso Ekweaga, Chukwunonso Daniel Ekweaga">
+  <meta name="author" content="Nonso Ekweaga">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0e0e0e">
+  <link rel="canonical" href="https://nonso.codes/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Nonso Ekweaga | Full-Stack, AI & Cloud Developer">
+  <meta property="og:description" content="Portfolio of Nonso Ekweaga, a Dalhousie Applied Computer Science student building full-stack, AI, cloud and data applications with TypeScript, Python, PostgreSQL, AWS and Azure.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nonso.codes/">
+  <meta property="og:image" content="https://nonso.codes/social-share.svg">
+  <meta property="og:site_name" content="Nonso Ekweaga">
+  <meta property="og:locale" content="en_CA">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nonso Ekweaga | Full-Stack, AI & Cloud Developer">
+  <meta name="twitter:description" content="Portfolio of Nonso Ekweaga, a Dalhousie Applied Computer Science student building full-stack, AI, cloud and data applications with TypeScript, Python, PostgreSQL, AWS and Azure.">
+  <meta name="twitter:image" content="https://nonso.codes/social-share.svg">
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="header image.png">
   <link rel="apple-touch-icon" href="header image.png">
-  <meta name="theme-color" content="#0b0b0b">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nonso Ekweaga",
+    "alternateName": "Chukwunonso Daniel Ekweaga",
+    "url": "https://nonso.codes/",
+    "jobTitle": "Software Engineer",
+    "email": "danielekweaga@gmail.com",
+    "location": {
+      "@type": "City",
+      "name": "Halifax, Nova Scotia, Canada"
+    },
+    "sameAs": [
+      "https://github.com/danekweaga",
+      "https://www.linkedin.com/in/chukwunonso-daniel-ekweaga/"
+    ],
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Dalhousie University"
+    },
+    "knowsAbout": ["Software Engineering", "Full-Stack Development", "TypeScript", "React", "Next.js", "Python", "PostgreSQL", "AWS", "Azure", "AI", "Cloud Computing", "Data Engineering", "DevOps"]
+  }
+  </script>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Floating geometric background shapes -->
-  <div class="geometric-bg shape-1">
-    <svg viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none"/>
-    </svg>
-  </div>
-  <div class="geometric-bg shape-2">
-    <svg viewBox="0 0 100 100">
-      <polygon points="50,5 95,75 5,75" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none"/>
-    </svg>
-  </div>
-  <div class="geometric-bg shape-3">
-    <svg viewBox="0 0 100 100">
-      <rect x="10" y="10" width="80" height="80" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none"/>
-    </svg>
-  </div>
 
-  <!-- Top bar: logo, greeting, clock -->
-  <div class="topbar">
-    <div class="top-left">
-      <div class="clock" aria-hidden="false" title="Local time"></div>
-      <div class="topbar-links">
-        <!-- Resume moved to main nav for easier access on mobile -->
-      </div>
+  <!-- Skip to main content for accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Navigation -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="#" class="logo" aria-label="Nonso Ekweaga - Home">NE</a>
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
+        <ul id="nav-menu" class="nav-menu">
+          <li><a href="#work">Work</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#building">Building</a></li>
+          <li><a href="#posts">Posts</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="https://drive.google.com/file/d/1cFklpjNJI2-tKJNjwq6rfoWKYUwmiJXJ/view?usp=sharing" target="_blank" rel="noopener noreferrer">Résumé</a></li>
+          <li><a href="#contact" class="nav-cta">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="greeting" aria-live="polite">Hello</div>
-    <div class="logo">
-      <a href="#">
-        <img src="nonso wo bg.png" alt="CDE Logo">
-      </a>
-    </div>
-  </div>
-  <header>
-    <h1 class="slide-in">Chukwunonso Daniel Ekweaga</h1>
-    <p class="slide-in">Aspiring Software Engineer | Web Developer | Problem Solver</p>
-    <nav>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-      <span class="resume-note" id="download-resume" title="Resume is being updated">Resume (updating soon)</span>
-    </nav>
   </header>
 
+  <main id="main">
 
-  <section id="about" class="fade-in">
-    <h2>About Me</h2>
-    <p>I am an Applied Computer Science student at Dalhousie Univerity with a strong foundation in programming, web development, and problem solving. I enjoy creating meaningful software, from responsive websites to robust applications, with a focus on clean and efficient design.</p>
-    <div class="skills">
-      <h3>Skills</h3>
-      <p><strong>Languages:</strong> Java, Python, SQL, C</p>
-      <p><strong>Web:</strong> HTML5, CSS3, JavaScript</p>
-      <p><strong>Tools:</strong> Git, VS Code, IntelliJ IDEA, Linux</p>
-      <p><strong>Concepts:</strong> OOP, Data Structures, Algorithms</p>
-
-      <!-- Skills icons (skillicons.dev) -->
-      <div class="skillsicons-wrap">
-        <img class="skillsicons-img" src="https://skillicons.dev/icons?i=js,html,css,java,python,mysql,c,git,vscode,linux" alt="Skills icons">
-      </div>
-    </div>
-  </section>
-  
-
-  <section id="projects" class="fade-in">
-    <h2>Projects</h2>
-    <div class="projects-pagination" role="tablist" aria-label="Project pages">
-      <button class="projects-page-btn active" data-project-page-btn="1" role="tab" aria-selected="true">Page 1</button>
-      <button class="projects-page-btn" data-project-page-btn="2" role="tab" aria-selected="false">Page 2</button>
-    </div>
-
-    <div class="project slide-in" data-project-page="1">
-      <h3>CourtLedger — NBA Bet Tracking &amp; Analytics Dashboard</h3>
-      <p class="project-short" tabindex="0" role="button" aria-expanded="false">Web app for logging bets, tracking live positions, and measuring ROI across your NBA ledger.</p>
-      <div class="project-details" aria-hidden="true">
-        <div class="project-details-inner">
-          <p class="project-long">CourtLedger helps users record props and game bets, monitor pending vs settled outcomes, analyze performance by market and sportsbook, and export ledgers for review. It includes Highlight Hub for official NBA YouTube highlights, optional auto-settlement for supported player props, bet slip OCR, and secure auth with user-scoped data. Built with React (TypeScript), Vite, Tailwind CSS, Supabase, Recharts, and deployed on Vercel.</p>
-          <a class="project-download" href="https://court-ledger.vercel.app/" target="_blank" rel="noopener" data-file="">Live Demo</a>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Applied Computer Science student at Dalhousie University</p>
+        <h1>Building practical software—from full-stack products to cloud automation.</h1>
+        <p class="hero-body">I'm Nonso, a developer working with TypeScript, React, Python, PostgreSQL and cloud platforms. I build practical products and systems that make information clearer and workflows easier.</p>
+        <p class="hero-availability">Open to Fall 2026 software engineering, full-stack, AI, cloud and data internships across Canada.</p>
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-primary">View selected work</a>
+          <a href="https://drive.google.com/file/d/1cFklpjNJI2-tKJNjwq6rfoWKYUwmiJXJ/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">View résumé</a>
+        </div>
+        <div class="hero-links">
+          <a href="https://github.com/danekweaga" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/chukwunonso-daniel-ekweaga/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="mailto:danielekweaga@gmail.com" aria-label="Email">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Email
+          </a>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="project slide-in" data-project-page="1">
-      <h3>Kairos — Real-Time Focus & Decision System</h3>
-      <p class="project-short" tabindex="0" role="button" aria-expanded="false">Web app for ranking tasks by impact, matching work to energy, and preventing burnout.</p>
-      <div class="project-details" aria-hidden="true">
-        <div class="project-details-inner">
-          <p class="project-long">Kairos helps users prioritize high-ROI tasks, run checkpoint-based focus sessions, and adapt breaks in real time. It includes session persistence and recovery, plus secure auth/profile flows. Built with React (TypeScript), shadcn/ui, Tailwind CSS, Supabase, LocalStorage, and deployed on Vercel.</p>
-          <a class="project-download" href="https://kairos-six-inky.vercel.app" target="_blank" rel="noopener" data-file="">Live Demo</a>
-          <a class="project-download" href="https://github.com/danekweaga/kairos" target="_blank" rel="noopener" data-file="">GitHub</a>
-        </div>
-      </div>
-    </div>
+    <!-- Selected Work -->
+    <section id="work" class="section">
+      <div class="container">
+        <h2 class="section-title">Selected work</h2>
 
-    <div class="project slide-in" data-project-page="1">
-      <h3>MoneyCheck — Think Before You Spend</h3>
-      <p class="project-short" tabindex="0" role="button" aria-expanded="false">Real-time spending decision tool that shows true cost, risk, and long-term purchase impact.</p>
-      <div class="project-details" aria-hidden="true">
-        <div class="project-details-inner">
-          <p class="project-long">MoneyCheck helps users evaluate purchases instantly with budget impact scoring, risk analysis, future value visualization, AI-powered explanations, a personal finance dashboard, and exportable records. Built as a full-stack application using Next.js, Supabase, and OpenAI.</p>
-          <a class="project-download" href="https://money-check-theta.vercel.app/dashboard" target="_blank" rel="noopener" data-file="">Live Demo</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project slide-in" data-project-page="1">
-      <h3>UniGuide AI — Student Resource Chatbot</h3>
-      <p class="project-short" tabindex="0" role="button" aria-expanded="false">Hackathon chatbot that helps students find trusted support resources in seconds.</p>
-      <div class="project-details" aria-hidden="true">
-        <div class="project-details-inner">
-          <p class="project-long">UniGuide AI lets students describe their situation in plain language, then returns relevant support links from university, government, and local services. I helped prototype the chat flow, shape response clarity, and present the solution during the final pitch.</p>
-          <a class="project-download" href="https://github.com/UniGuide-AI/main" target="_blank" rel="noopener" data-file="">GitHub</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project slide-in" data-project-page="1">
-      <h3>Ojuju — Global Game Jam 2026</h3>
-      <p class="project-short" tabindex="0" role="button" aria-expanded="false">2D Unity platformer where unlockable masks change how players solve each level.</p>
-      <div class="project-details" aria-hidden="true">
-        <div class="project-details-inner">
-          <p class="project-long">Built during Global Game Jam 2026, Ojuju features mask-based abilities like platform freeze, enhanced jumps, and temporary invincibility. I contributed to gameplay implementation, rapid testing, and polish across desktop and mobile builds under a tight deadline.</p>
-          <div class="project-media">
-            <button class="open-video-btn" data-video-src="https://www.youtube.com/embed/p0ML6xX6aCY">Watch Video</button>
-            <p class="media-caption">Ojuju - gameplay demo</p>
+        <!-- Project 1: Becoming -->
+        <article class="project-card featured">
+          <div class="project-screenshot">
+            <img src="project-becoming.png" alt="Becoming app screenshot showing habit tracking dashboard" loading="lazy" width="800" height="450">
           </div>
-          <a class="project-download" href="https://github.com/Emmanuel27121/Game_Jam_2026" target="_blank" rel="noopener" data-file="">GitHub</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project slide-in" data-project-page="2">
-      <h3>Polynomial Calculator</h3>
-  <p class="project-short" tabindex="0" role="button" aria-expanded="false">GUI-based calculator in JavaFX capable of solving polynomials up to the 3rd degree.</p>
-      <div class="project-details" aria-hidden="true">
-        <div class="project-details-inner">
-          <p class="project-long">The Polynomial Calculator is a sleek JavaFX app by Chukwunonso Daniel Ekweaga for solving and graphing linear, quadratic, and cubic equations. Featuring a modern dark UI, custom keypad, quick polynomial buttons, and a graph viewer, it makes equation input and visualization simple. 
-            Powered by a reliable MathLogic engine, it ensures accurate results with a stylish, responsive design that runs smoothly in any Java IDE or BlueJ.</p>
-          <a class="project-download" href="https://github.com/danekweaga/Polynomial-Calculator/tree/main" target="_blank" rel="noopener" data-file="">GitHub</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project slide-in" data-project-page="2">
-      <h3>University Library Database</h3>
-      <p class="project-short" tabindex="0" role="button" aria-expanded="false">Command-line application using Java and SQL for managing library records with CRUD operations.</p>
-      <div class="project-details" aria-hidden="true">
-        <div class="project-details-inner">
-          <p class="project-long">The University Library Management System is a command-line Java application built with MySQL to streamline how libraries manage books, users, borrowing, and fines. 
-            Developed as a collaborative project, it allows administrators to add and update books, register students and faculty, track borrowing and returns, 
-            and automatically calculate overdue fines. With efficient search and reporting features, the system provides a reliable way to organize resources and maintain accurate records, all while demonstrating strong database integration through JDBC.
-</p>
-          <a class="project-download" href="https://github.com/danekweaga/Database-Project" target="_blank" rel="noopener" data-file="">GitHub</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project slide-in" data-project-page="2">
-      <h3>Game Giveaway Tool</h3>
-      <p class="project-short" tabindex="0" role="button" aria-expanded="false">Desktop JavaFX application for streamers to conduct giveaways, using randomized algorithms.</p>
-      <div class="project-details" aria-hidden="true">
-        <div class="project-details-inner">
-          <p class="project-long">Nana's Crossing is a fun Java game where you help a grandmother cross a busy 8-lane highway. 
-            Each lane you cross earns money, but it gets riskier as you go - starting at 10% chance of getting hit and rising to 31%. The challenge is deciding when to cash out your winnings or risk it all for the big payout. 
-            Built with JavaFX, it features smooth animations, sound effects, and an easy-to-use interface perfect for streaming to an audience.</p>
-          <div class="project-media">
-            <button class="open-video-btn" data-video-src="https://www.youtube.com/embed/TQymY1GnweA?si=K-OEld5gvgU44H7H">Watch Video</button>
-            <p class="media-caption">Nana's Crossing - gameplay & guide</p>
+          <div class="project-info">
+            <p class="project-label">Full-Stack Application</p>
+            <h3>Becoming — Habit and Growth Tracking</h3>
+            <p>A full-stack application that helps users define a yearly vision, organize it into seasons, track habits and wellness, and review how they have changed over time.</p>
+            <ul class="project-details">
+              <li>Designed a multi-model data layer for users, seasons, habits, and daily check-ins.</li>
+              <li>Implemented Prisma schema design, migrations, type-safe queries, and seed scripts.</li>
+              <li>Configured PostgreSQL on AWS Aurora with SSL/TLS connection handling and production deployment.</li>
+              <li>Built server-action writes and dashboard data reads.</li>
+            </ul>
+            <div class="project-stack">
+              <span>Next.js</span>
+              <span>Prisma ORM</span>
+              <span>PostgreSQL</span>
+              <span>AWS Aurora</span>
+              <span>Vercel</span>
+              <span>Server Actions</span>
+            </div>
+            <div class="project-links">
+              <a href="https://becoming-nine.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-sm">Live demo</a>
+              <a href="https://github.com/danekweaga/Becoming" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">GitHub</a>
+            </div>
           </div>
-          <a class="project-download" href="https://github.com/danekweaga/New-Updated-Nana-Crossing" target="_blank" rel="noopener" data-file="" download>Github</a>
+        </article>
+
+        <!-- Project 2: CourtLedger -->
+        <article class="project-card featured">
+          <div class="project-screenshot">
+            <img src="project-courtledger.png" alt="CourtLedger analytics dashboard showing sports betting metrics" loading="lazy" width="800" height="450">
+          </div>
+          <div class="project-info">
+            <p class="project-label">Analytics Dashboard</p>
+            <h3>CourtLedger — Sports Analytics and ROI Tracking</h3>
+            <p>A full-stack analytics dashboard for recording sports bets, monitoring results, and analyzing performance across markets and sportsbooks.</p>
+            <ul class="project-details">
+              <li>Built structured record creation, filtering, search, reporting views, and CSV/Excel export.</li>
+              <li>Implemented Supabase authentication and PostgreSQL storage.</li>
+              <li>Used Row-Level Security to keep data scoped to individual users.</li>
+              <li>Added summary metrics, analytics visualizations, and supported bet-slip OCR.</li>
+            </ul>
+            <div class="project-stack">
+              <span>React</span>
+              <span>TypeScript</span>
+              <span>Vite</span>
+              <span>Tailwind CSS</span>
+              <span>Supabase</span>
+              <span>PostgreSQL</span>
+              <span>Recharts</span>
+            </div>
+            <div class="project-links">
+              <a href="https://court-ledger.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-sm">Live demo</a>
+              <a href="https://github.com/danekweaga/CourtLedger" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Azure Monitor -->
+        <article class="project-card featured">
+          <div class="project-screenshot">
+            <img src="project-azure-monitor.png" alt="Azure Serverless Uptime Monitor showing uptime statistics" loading="lazy" width="800" height="450">
+          </div>
+          <div class="project-info">
+            <p class="project-label">Cloud Infrastructure</p>
+            <h3>Azure Serverless Uptime Monitor</h3>
+            <p>A serverless monitoring system that performs scheduled service checks and records uptime, response time, and failure history.</p>
+            <ul class="project-details">
+              <li>Created scheduled URL checks using Python Azure Functions.</li>
+              <li>Calculated uptime percentage, average response time, and failure statistics.</li>
+              <li>Stored monitoring history in Azure Table Storage.</li>
+              <li>Added HTTP endpoints, structured logging, graceful error handling, and optional Discord alerts.</li>
+              <li>Provisioned infrastructure with Terraform basics and automated deployment with GitHub Actions.</li>
+            </ul>
+            <div class="project-stack">
+              <span>Python</span>
+              <span>Azure Functions</span>
+              <span>Azure Table Storage</span>
+              <span>GitHub Actions</span>
+              <span>Terraform</span>
+              <span>HTTP APIs</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/danekweaga/azure-serverless-uptime-monitor" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4: MoneyCheck -->
+        <article class="project-card featured">
+          <div class="project-screenshot">
+            <img src="project-moneycheck.png" alt="MoneyCheck financial decision tool showing purchase analysis" loading="lazy" width="800" height="450">
+          </div>
+          <div class="project-info">
+            <p class="project-label">AI-Powered Application</p>
+            <h3>MoneyCheck — AI Financial Decision Tool</h3>
+            <p>A full-stack decision-support application that helps users understand the financial impact of a purchase before spending.</p>
+            <ul class="project-details">
+              <li>Converts spending scenarios into budget impact, opportunity cost, risk, and future-value impact.</li>
+              <li>Implemented authentication and database-backed decision history.</li>
+              <li>Added structured decision records, API integrations, and AI-powered explanations.</li>
+              <li>Created a financial dashboard and exportable records.</li>
+            </ul>
+            <div class="project-stack">
+              <span>Next.js</span>
+              <span>React</span>
+              <span>TypeScript</span>
+              <span>Supabase</span>
+              <span>PostgreSQL</span>
+              <span>OpenAI</span>
+              <span>Vercel</span>
+            </div>
+            <div class="project-links">
+              <a href="https://money-check-theta.vercel.app/dashboard" target="_blank" rel="noopener noreferrer" class="btn btn-sm">Live demo</a>
+              <a href="https://github.com/danekweaga/MoneyCheck" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- More Projects -->
+        <div class="more-projects">
+          <h3>More projects</h3>
+          <div class="project-grid">
+            <a href="https://kairos-six-inky.vercel.app" target="_blank" rel="noopener noreferrer" class="mini-project">
+              <span class="mini-project-name">Kairos</span>
+              <span class="mini-project-desc">Real-time focus and decision system</span>
+            </a>
+            <a href="https://github.com/danekweaga/Loan-Default-Risk-Dashboard" target="_blank" rel="noopener noreferrer" class="mini-project">
+              <span class="mini-project-name">Loan Default Risk Dashboard</span>
+              <span class="mini-project-desc">ML-powered loan risk analysis</span>
+            </a>
+            <a href="https://github.com/Emmanuel27121/Game_Jam_2026" target="_blank" rel="noopener noreferrer" class="mini-project">
+              <span class="mini-project-name">Ojuju</span>
+              <span class="mini-project-desc">2D Unity platformer (Global Game Jam 2026)</span>
+            </a>
+            <a href="https://github.com/UniGuide-AI/main" target="_blank" rel="noopener noreferrer" class="mini-project">
+              <span class="mini-project-name">UniGuide AI</span>
+              <span class="mini-project-desc">Student resource chatbot</span>
+            </a>
+            <a href="https://github.com/danekweaga/Auto-Code-Marker" target="_blank" rel="noopener noreferrer" class="mini-project">
+              <span class="mini-project-name">Auto Code Marker</span>
+              <span class="mini-project-desc">Automated code assessment tool</span>
+            </a>
+            <a href="https://github.com/danekweaga/Smallest-Backend" target="_blank" rel="noopener noreferrer" class="mini-project">
+              <span class="mini-project-name">Smallest Backend</span>
+              <span class="mini-project-desc">Minimal API server</span>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="project slide-in" data-project-page="2">
-      <h3>Business Website for a Moving Company</h3>
-      <p class="project-short" tabindex="0" role="button" aria-expanded="false">Responsive website built with HTML5, CSS3, and JavaScript. Includes a contact form and cross-browser testing.</p>
-      <div class="project-details" aria-hidden="true">
-        <div class="project-details-inner">
-          <p class="project-long"><strong>Citi Logistics Website</strong> is a professional business website developed for a moving and logistics company in Saint John. It showcases services like residential moving, commercial relocations, and package delivery with a clean, responsive design. Built with modern web technologies and ready for deployment, this project demonstrates front-end development skills and business-focused web design.</p>
-          <a class="project-download" href="https://danekweaga.github.io/Citi-Logistics-Website/" target="_blank" rel="noopener" data-file="">Visit site</a>
+    <!-- Experience -->
+    <section id="experience" class="section">
+      <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="timeline-date">Jul 2026 – Present</div>
+            <div class="timeline-content">
+              <h3>Backend AI Engineering Track</h3>
+              <p class="timeline-org">FlyRank AI <span class="timeline-tag">Unpaid Educational Internship</span></p>
+              <p>Participating in a backend AI engineering track covering API contracts, retrieval-backed workflows, structured outputs, evaluation harnesses, grounding, audit trails, and production-style failure handling.</p>
+              <p>Designing backend workflows with defined inputs, outputs, constraints, error states, retry considerations, verification notes, and documented limitations.</p>
+              <p>Built and tested a small Express backend with two JSON endpoints using browser and curl testing and published it to GitHub.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2026</div>
+            <div class="timeline-content">
+              <h3>AI Document Intelligence Externship</h3>
+              <p class="timeline-org">Extern — Pfizer-connected project <span class="timeline-tag">Remote</span></p>
+              <p>Building an AI-powered document intelligence prototype for pharmaceutical compliance workflows using Python, OCR, NLP, and RAG-style search.</p>
+              <p>Prototyping document search, metadata extraction, classification, and compliance-risk flagging across pharmaceutical documents.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Nov 2025 – Jan 2026</div>
+            <div class="timeline-content">
+              <h3>Research Assistant</h3>
+              <p class="timeline-org">Remedial Voice Lab, University of New Brunswick <span class="timeline-tag">Saint John, NB</span></p>
+              <p>Audited 15 research and laboratory websites for usability, accessibility, navigation, and content-organization issues.</p>
+              <p>Documented findings and created low-fidelity mockups for information-architecture improvements.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Sep 2025 – Oct 2025</div>
+            <div class="timeline-content">
+              <h3>Laboratory Assistant</h3>
+              <p class="timeline-org">University of New Brunswick <span class="timeline-tag">Saint John, NB</span></p>
+              <p>Supported students learning procedural programming in C through one-on-one guidance on debugging, compilation, testing, and version control.</p>
+              <p>Explained technical concepts clearly and reinforced good programming workflows.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Jan 2024 – Sep 2025</div>
+            <div class="timeline-content">
+              <h3>Administrative Assistant</h3>
+              <p class="timeline-org">Nexora 360 Holdings Inc. <span class="timeline-tag">Saint John, NB</span></p>
+              <p>Maintained digital records and supported scheduling, communications, documentation, and day-to-day operations.</p>
+              <p>Kept business information accurate, organized, and accessible.</p>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="project slide-in" data-project-page="2">
-      <h3>Data Structures Portfolio</h3>
-      <p class="project-short" tabindex="0" role="button" aria-expanded="false">Collection of fundamental data structure implementations in C and Java (linked lists, stacks, queues, BSTs, and more).</p>
-      <div class="project-details" aria-hidden="true">
-        <div class="project-details-inner">
-          <p class="project-long">This repository contains lab implementations of core data structures written in both Java and C to demonstrate memory management, algorithmic complexity, and practical usage. It includes linked lists, stacks, queues, nodes, and a binary search tree.</p>
-          <a class="project-download" href="https://github.com/danekweaga/Data-Structures-Portfolio" target="_blank" rel="noopener" data-file="">View on GitHub</a>
+    <!-- Currently Building -->
+    <section id="building" class="section">
+      <div class="container">
+        <h2 class="section-title">Currently building</h2>
+        <div class="building-card">
+          <div class="building-content">
+            <h3>KlearBooks — Messy records in. Clean monthly report out.</h3>
+            <p>KlearBooks is an early-stage bookkeeping product I'm currently building and validating for freelancers, gig workers, and small-business owners. The idea is to help people organize records such as receipts, invoices, expenses, and transactions into clearer monthly reports and insights.</p>
+            <p class="building-note">Early-stage product. Not yet launched publicly.</p>
+            <a href="https://www.klearbooks.app/" target="_blank" rel="noopener noreferrer" class="btn btn-sm">Visit klearbooks.app</a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!--
-  <section id="experience" class="fade-in">
-    <h2>Experience</h2>
-    <div class="job slide-in">
-      <h3>Nexora 360 Holdings Inc. – Administrative Assistant</h3>
-      <p><em>Jan 2024 - Sep 2025</em></p>
-      <p>Supported project coordination, managed office resources, and upheld company standards to improve customer satisfaction.</p>
-    </div>
-    <div class="volunteer slide-in">
-      <h3>Pavillion of Redemption SJ – Camera Operator</h3>
-      <p><em>Sep 2024 - Present</em></p>
-      <p>Operated main and secondary cameras during events to deliver professional live streaming.</p>
-    </div>
-    <div class="volunteer slide-in">
-      <h3>Saint John High School – Social Media Manager</h3>
-      <p><em>Mar 2024 - May 2024</em></p>
-      <p>Co-managed Instagram for the Boys Volleyball team, designing and posting content to increase engagement.</p>
-    </div>
-    <div class="leadership slide-in">
-      <h3>Pavillion of Redemption SJ – Team Leader</h3>
-      <p><em>Apr 2024 - Sep 2024</em></p>
-      <p>Led the RCCG POR Teen Council, planned events, and managed teen-focused programs including summer camp supervision.</p>
-    </div>
-  </section>
-  -->
+    <!-- Recognition & Credentials -->
+    <section id="recognition" class="section">
+      <div class="container">
+        <h2 class="section-title">Recognition and credentials</h2>
 
-  <section id="contact" class="fade-in">
-    <h2>Contact</h2>
-    <p>If you'd like to connect, feel free to reach out via the links below:</p>
-    <div class="links slide-in">
-      <a href="mailto:danielekweaga@gmail.com" aria-label="Email"> 
-        <img class="contact-icon" src="https://skillicons.dev/icons?i=gmail" alt="Email icon"> 
-        <span>Email</span>
-      </a>
-      <a href="https://www.linkedin.com/in/chukwunonso-daniel-ekweaga/" target="_blank" class="external-link" aria-label="LinkedIn"> 
-        <img class="contact-icon" src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn icon"> 
-        <span>LinkedIn</span>
-      </a>
-      <a href="https://github.com/danekweaga" target="_blank" class="external-link" aria-label="GitHub"> 
-        <img class="contact-icon" src="https://skillicons.dev/icons?i=github" alt="GitHub icon"> 
-        <span>GitHub</span>
-      </a>
-    </div>
-  </section>
+        <div class="credentials-grid">
+          <div class="credential-card">
+            <h4>Award</h4>
+            <p>Standout Idea Award</p>
+            <span class="credential-source">King's Campus2Market Discover Program, March 2026</span>
+          </div>
+          <div class="credential-card">
+            <h4>Certificate</h4>
+            <p>Black Youth AI Hackathon — Certificate of Participation</p>
+            <span class="credential-source">Tribe Network, March 2026</span>
+          </div>
+          <div class="credential-card">
+            <h4>Participant</h4>
+            <p>Global Game Jam 2026</p>
+            <span class="credential-source">Global Game Jam, 2026</span>
+          </div>
+          <div class="credential-card">
+            <h4>Leadership</h4>
+            <p>Teen Council Team Leader</p>
+            <span class="credential-source">Pavilion of Redemption SJ, Apr 2024 – Sep 2024</span>
+          </div>
+        </div>
 
-  <footer>
-    <p>© Chukwunonso Daniel Ekweaga</p>
+        <h3 class="subsection-title">Professional development</h3>
+        <div class="credentials-grid">
+          <div class="credential-card">
+            <h4>Certificate</h4>
+            <p>Claude 101</p>
+            <span class="credential-source">Anthropic, June 2026</span>
+          </div>
+          <div class="credential-card">
+            <h4>Certificate</h4>
+            <p>AI Fluency: Framework & Foundations</p>
+            <span class="credential-source">Anthropic, June 2026</span>
+          </div>
+          <div class="credential-card">
+            <h4>Event</h4>
+            <p>AI Skills Fest 2026</p>
+            <span class="credential-source">Microsoft, June 2026</span>
+          </div>
+          <div class="credential-card">
+            <h4>Job Simulation</h4>
+            <p>Deloitte Australia Technology Job Simulation</p>
+            <span class="credential-source">Forage</span>
+          </div>
+          <div class="credential-card">
+            <h4>Job Simulation</h4>
+            <p>Datacom Introduction to Cloud Job Simulation</p>
+            <span class="credential-source">Forage</span>
+          </div>
+          <div class="credential-card">
+            <h4>Job Simulation</h4>
+            <p>Tata GenAI-Powered Data Analytics Job Simulation</p>
+            <span class="credential-source">Forage</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Selected LinkedIn Posts -->
+    <section id="posts" class="section">
+      <div class="container">
+        <h2 class="section-title">Selected posts</h2>
+        <div class="posts-grid">
+
+          <a href="https://www.linkedin.com/posts/chukwunonso-daniel-ekweaga_i-made-a-small-project-called-becoming-for-ugcPost-7477951404205154305-Vib4/" target="_blank" rel="noopener noreferrer" class="post-card">
+            <span class="post-date">July 2, 2026</span>
+            <h3>Becoming — Building with Next.js, Prisma and AWS Aurora</h3>
+            <p>What I learned while building and deploying a full-stack growth-tracking application using Next.js, Prisma, AWS Aurora PostgreSQL, and Vercel.</p>
+            <span class="post-link">Read on LinkedIn →</span>
+          </a>
+
+          <a href="https://www.linkedin.com/posts/chukwunonso-daniel-ekweaga_this-sunday-i-participated-in-a-hackathon-activity-7443342963146969088-phS5" target="_blank" rel="noopener noreferrer" class="post-card">
+            <span class="post-date">March 27, 2026</span>
+            <h3>Kairos — What I learned from my first solo hackathon</h3>
+            <p>Taking a productivity and decision-support idea from concept to working prototype during a six-hour solo hackathon.</p>
+            <span class="post-link">Read on LinkedIn →</span>
+          </a>
+
+          <a href="https://www.linkedin.com/posts/chukwunonso-daniel-ekweaga_two-weeks-ago-i-attended-the-campus-2-market-activity-7448802656262852609-SgzO" target="_blank" rel="noopener noreferrer" class="post-card">
+            <span class="post-date">April 11, 2026</span>
+            <h3>Turning MoneyCheck into a Standout Idea</h3>
+            <p>Developing MoneyCheck, improving my one-minute pitch, and receiving the Campus2Market Standout Idea Award.</p>
+            <span class="post-link">Read on LinkedIn →</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- About & Skills -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">About</h2>
+        <div class="about-grid">
+          <div class="about-image">
+            <img src="nonso.png" alt="Nonso Ekweaga portrait" loading="lazy" width="400" height="500">
+          </div>
+          <div class="about-text">
+            <p>I'm an Applied Computer Science student at Dalhousie University who enjoys taking ideas from rough concepts to working products. My work spans full-stack development, AI-enabled applications, cloud infrastructure, and data visualization. I'm especially interested in understanding how the product, backend, and user experience fit together—not just making individual features work.</p>
+            <p>Based in Halifax, Nova Scotia. Open to internships and student developer roles across Canada.</p>
+          </div>
+          <div class="skills-section">
+            <h3>Technical skills</h3>
+            <div class="skills-groups">
+              <div class="skills-group">
+                <h4>Languages</h4>
+                <ul>
+                  <li>TypeScript</li>
+                  <li>JavaScript</li>
+                  <li>Python</li>
+                  <li>SQL</li>
+                  <li>Java</li>
+                  <li>C</li>
+                  <li>HTML/CSS</li>
+                </ul>
+              </div>
+              <div class="skills-group">
+                <h4>Frontend</h4>
+                <ul>
+                  <li>React</li>
+                  <li>Next.js</li>
+                  <li>Vite</li>
+                  <li>Tailwind CSS</li>
+                  <li>React Router</li>
+                  <li>Responsive UI Design</li>
+                </ul>
+              </div>
+              <div class="skills-group">
+                <h4>Backend & Data</h4>
+                <ul>
+                  <li>Prisma ORM</li>
+                  <li>PostgreSQL</li>
+                  <li>AWS Aurora</li>
+                  <li>Supabase</li>
+                  <li>REST APIs</li>
+                  <li>Authentication</li>
+                  <li>Row-Level Security</li>
+                  <li>Server Actions</li>
+                </ul>
+              </div>
+              <div class="skills-group">
+                <h4>AI & Automation</h4>
+                <ul>
+                  <li>OpenAI API</li>
+                  <li>AI Workflow Design</li>
+                  <li>RAG Concepts</li>
+                  <li>OCR/NLP Basics</li>
+                  <li>Structured Outputs</li>
+                  <li>Document Intelligence</li>
+                </ul>
+              </div>
+              <div class="skills-group">
+                <h4>Cloud & Analytics</h4>
+                <ul>
+                  <li>Microsoft Azure</li>
+                  <li>Azure Functions</li>
+                  <li>Azure Storage</li>
+                  <li>GitHub Actions</li>
+                  <li>Vercel</li>
+                  <li>Terraform Basics</li>
+                  <li>Power BI</li>
+                  <li>DAX</li>
+                  <li>Excel</li>
+                </ul>
+              </div>
+              <div class="skills-group">
+                <h4>Tools & Concepts</h4>
+                <ul>
+                  <li>Git / GitHub</li>
+                  <li>VS Code</li>
+                  <li>Linux</li>
+                  <li>CI/CD</li>
+                  <li>Debugging</li>
+                  <li>Testing Basics</li>
+                  <li>Technical Documentation</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section id="contact" class="section contact-section">
+      <div class="container">
+        <h2 class="section-title">Have an opportunity or an interesting project?</h2>
+        <p class="contact-body">I'm currently looking for Fall 2026 internships and student developer roles in software engineering, full-stack development, AI, cloud engineering, and data.</p>
+        <div class="contact-actions">
+          <a href="mailto:danielekweaga@gmail.com" class="btn btn-primary btn-lg">Email Nonso</a>
+          <div class="contact-links">
+            <a href="https://github.com/danekweaga" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/chukwunonso-daniel-ekweaga/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://drive.google.com/file/d/1cFklpjNJI2-tKJNjwq6rfoWKYUwmiJXJ/view?usp=sharing" target="_blank" rel="noopener noreferrer">Résumé</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>&copy; <span id="footer-year"></span> Nonso Ekweaga. Built with HTML, CSS, and JavaScript.</p>
+    </div>
   </footer>
 
   <script src="script.js"></script>
-  <!-- Video modal (opens when user clicks Watch Video) -->
-  <div id="video-modal" class="video-modal" aria-hidden="true">
-    <div class="video-modal-backdrop" data-close></div>
-    <div class="video-modal-content" role="dialog" aria-modal="true" aria-label="Video player">
-      <button class="video-modal-close" aria-label="Close video" data-close>&times;</button>
-      <div class="video-wrapper">
-        <iframe id="video-iframe" class="video-iframe" src="" frameborder="0" allowfullscreen title="Embedded video"></iframe>
-      </div>
-    </div>
-  </div>
 </body>
 </html>

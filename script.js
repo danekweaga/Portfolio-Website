@@ -1,450 +1,106 @@
-// Intersection Observer for scroll animations
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
+// Mobile navigation toggle
+(function () {
+  const toggle = document.querySelector('.nav-toggle');
+  const menu = document.getElementById('nav-menu');
 
-// Create intersection observer
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      
-      // Add staggered animation for project items
-      if (entry.target.classList.contains('project') || 
-          entry.target.classList.contains('job') || 
-          entry.target.classList.contains('volunteer') || 
-          entry.target.classList.contains('leadership')) {
-        
-        const items = entry.target.parentElement.querySelectorAll('.slide-in');
-        items.forEach((item, index) => {
-          setTimeout(() => {
-            item.classList.add('visible');
-          }, index * 150);
-        });
-      }
-    }
-  });
-}, observerOptions);
-
-// Initialize animations when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  let isTouchDevice = false;
-
-  // Touch-detection: add `.no-fancy-ui` for devices with touch support
-  try {
-    isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
-    if (isTouchDevice) document.documentElement.classList.add('no-fancy-ui');
-  } catch (e) { /* ignore */ }
-
-  // Update footer with current year
-  const currentYear = new Date().getFullYear();
-  const footerText = document.querySelector('footer p');
-  if (footerText) {
-    footerText.textContent = `© ${currentYear} Chukwunonso Daniel Ekweaga`;
-  }
-  
-  // Initial header animations
-  setTimeout(() => {
-    document.querySelector('header h1').classList.add('loaded');
-  }, 500);
-  
-  setTimeout(() => {
-    document.querySelector('header p').classList.add('loaded');
-  }, 700);
-  
-  // Observe all animatable elements
-  const animateElements = document.querySelectorAll('.fade-in, .slide-in, .project, .job, .volunteer, .leadership, .links');
-  animateElements.forEach(el => observer.observe(el));
-  
-  // Smooth scroll for navigation
-  const navLinks = document.querySelectorAll('nav a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-
-      // If this is an in-page anchor (starts with '#'), intercept and smooth-scroll.
-      if (href && href.startsWith('#')) {
-        e.preventDefault();
-        const targetSection = document.querySelector(href);
-        if (targetSection) {
-          const offsetTop = targetSection.offsetTop - 50;
-          window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-        }
-        // visual feedback
-        link.style.transform = 'scale(0.95)';
-        setTimeout(() => { link.style.transform = ''; }, 150);
-        return;
-      }
-
-      // For non-hash links (files or external), allow default browser behavior.
-      // For same-origin resume file we can also provide a JS fallback to force download
-      // in browsers that ignore the `download` attribute on cross-origin links.
-      if (href && href.endsWith('.pdf')) {
-        // If browser supports download attribute we leave it (it's set in markup).
-        // As a conservative fallback, attempt a fetch & blob-download for same-origin files.
-        try {
-          const url = new URL(href, window.location.href);
-          if (url.origin === window.location.origin) {
-            e.preventDefault();
-            fetch(url.href).then(resp => {
-              if (!resp.ok) throw new Error('Network response was not ok');
-              return resp.blob();
-            }).then(blob => {
-              const blobUrl = URL.createObjectURL(blob);
-              const a = document.createElement('a');
-              a.href = blobUrl;
-              a.download = href.split('/').pop() || 'resume.pdf';
-              document.body.appendChild(a);
-              a.click();
-              a.remove();
-              URL.revokeObjectURL(blobUrl);
-            }).catch(() => {
-              // If fetch fails, fallback to letting the browser navigate normally
-              window.location.href = href;
-            });
-          }
-        } catch (err) {
-          // If anything goes wrong parsing the URL, let the browser handle it
-        }
-      }
-      // otherwise allow default navigation for external links
-    });
-  });
-  
-  // Enhanced scroll effects
-  let lastScrollTop = 0;
-  const header = document.querySelector('header');
-  const mobileParallaxQuery = window.matchMedia('(max-width: 900px)');
-  const shouldUseHeaderParallax = () => Boolean(header) && !isTouchDevice && !mobileParallaxQuery.matches;
-  
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollPercent = scrollTop / (document.documentElement.scrollHeight - window.innerHeight);
-    
-    // Parallax effect on header
-    if (shouldUseHeaderParallax() && scrollTop < window.innerHeight) {
-      const translateY = scrollTop * 0.5;
-      header.style.transform = `translateY(${translateY}px)`;
-      header.style.opacity = 1 - (scrollTop / window.innerHeight) * 0.8;
-    } else if (header) {
-      // Keep header static on touch/mobile devices to prevent top-of-page jitter.
-      header.style.transform = '';
-      header.style.opacity = '';
-    }
-    
-    // Text animation on scroll
-    animateTextElements();
-    
-    lastScrollTop = scrollTop;
-  });
-  
-  // Text reveal animation
-  function animateTextElements() {
-    const textElements = document.querySelectorAll('section p, section h3');
-    textElements.forEach(element => {
-      const elementTop = element.getBoundingClientRect().top;
-      const elementVisible = 150;
-      
-      if (elementTop < window.innerHeight - elementVisible) {
-        element.style.opacity = '1';
-        element.style.transform = 'translateY(0)';
-      }
-    });
-  }
-  
-  // Keep project cards stable while switching pages (remove pointer parallax jitter)
-  
-  // Enhanced hover effects for interactive elements
-  const interactiveElements = document.querySelectorAll('nav a, .links a, .job, .volunteer, .leadership');
-  
-  interactiveElements.forEach(element => {
-    element.addEventListener('mouseenter', () => {
-      element.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
-    });
-    
-    element.addEventListener('mouseleave', () => {
-      element.style.transform = '';
-      element.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
-    });
-  });
-  
-  // Progressive enhancement for reduced motion preference
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    // Disable complex animations for users who prefer reduced motion
-    document.querySelectorAll('*').forEach(el => {
-      el.style.animationDuration = '0.01ms';
-      el.style.animationIterationCount = '1';
-      el.style.transitionDuration = '0.01ms';
-      el.style.scrollBehavior = 'auto';
-    });
-  }
-  
-  // Keyboard navigation enhancement
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Tab') {
-      document.body.classList.add('keyboard-navigation');
-    }
-  });
-  
-  document.addEventListener('mousedown', () => {
-    document.body.classList.remove('keyboard-navigation');
-  });
-
-  // Clock: update element with local time every second
-  const clockEl = document.querySelector('.clock');
-  function updateClock() {
-    if (!clockEl) return;
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const seconds = now.getSeconds().toString().padStart(2, '0');
-    clockEl.textContent = `${hours}:${minutes}:${seconds}`;
-  }
-  updateClock();
-  setInterval(updateClock, 1000);
-
-  // Rotating greetings for the topbar
-  const greetings = [
-    'Hello', 'Hola', 'Bonjour', 'こんにちは', '안녕하세요', 'שלום', 'مرحبا', 'नमस्ते', 'Olá', 'Ciao'
-  ];
-  const greetingEl = document.querySelector('.greeting');
-  let greetIndex = 0;
-  function rotateGreeting() {
-    if (!greetingEl) return;
-    greetIndex = (greetIndex + 1) % greetings.length;
-    greetingEl.textContent = greetings[greetIndex];
-    greetingEl.classList.add('flash');
-    setTimeout(() => greetingEl.classList.remove('flash'), 900);
-  }
-  // rotate every 3 seconds
-  setInterval(rotateGreeting, 3000);
-
-  // Expand/collapse project details when short description clicked or activated
-  function toggleProjectDetails(el) {
-    const details = el.parentElement.querySelector('.project-details');
-    const short = el;
-    if (!details) return;
-    const isOpen = details.classList.toggle('open');
-    details.setAttribute('aria-hidden', String(!isOpen));
-    short.setAttribute('aria-expanded', String(isOpen));
-  }
-
-  document.querySelectorAll('.project-short').forEach(short => {
-    short.addEventListener('click', () => toggleProjectDetails(short));
-    short.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleProjectDetails(short);
-      }
-    });
-  });
-
-  // Projects pagination: toggle visible project cards by page number
-  const projectCards = Array.from(document.querySelectorAll('#projects .project[data-project-page]'));
-  const pageButtons = Array.from(document.querySelectorAll('[data-project-page-btn]'));
-
-  const PROJECT_PAGE_FADE_MS = 180;
-  let currentProjectPage = '1';
-  let pageSwitchToken = 0;
-
-  function setProjectPage(page, options = {}) {
-    const { immediate = false } = options;
-    if (!immediate && page === currentProjectPage) return;
-
-    pageSwitchToken += 1;
-    const activeToken = pageSwitchToken;
-
-    projectCards.forEach(card => {
-      const isActivePage = card.dataset.projectPage === page;
-
-      if (isActivePage) {
-        card.hidden = false;
-        card.classList.remove('project-page-hidden', 'project-page-fading-out');
-        if (immediate) {
-          card.classList.remove('project-page-fading-in');
-        } else {
-          card.classList.add('project-page-fading-in');
-          requestAnimationFrame(() => {
-            if (activeToken === pageSwitchToken) {
-              card.classList.remove('project-page-fading-in');
-            }
-          });
-        }
-      } else if (immediate) {
-        card.classList.add('project-page-hidden');
-        card.classList.remove('project-page-fading-in', 'project-page-fading-out');
-        card.hidden = true;
-      } else {
-        card.classList.remove('project-page-fading-in');
-        card.classList.add('project-page-fading-out');
-        window.setTimeout(() => {
-          if (activeToken !== pageSwitchToken) return;
-          card.classList.add('project-page-hidden');
-          card.classList.remove('project-page-fading-out');
-          card.hidden = true;
-        }, PROJECT_PAGE_FADE_MS);
-      }
-
-      if (!isActivePage) {
-        const details = card.querySelector('.project-details');
-        const shortDesc = card.querySelector('.project-short');
-        if (details) {
-          details.classList.remove('open');
-          details.setAttribute('aria-hidden', 'true');
-        }
-        if (shortDesc) shortDesc.setAttribute('aria-expanded', 'false');
-      }
+  if (toggle && menu) {
+    toggle.addEventListener('click', function () {
+      const isOpen = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    pageButtons.forEach(btn => {
-      const isCurrent = btn.dataset.projectPageBtn === page;
-      btn.classList.toggle('active', isCurrent);
-      btn.setAttribute('aria-selected', String(isCurrent));
-    });
-
-    currentProjectPage = page;
-  }
-
-  if (projectCards.length && pageButtons.length) {
-    pageButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        setProjectPage(btn.dataset.projectPageBtn);
+    // Close menu when a nav link is clicked
+    menu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
       });
     });
-    setProjectPage('1', { immediate: true });
-  }
 
-  // Hook up project-download links: if data-file attr set, update href
-  document.querySelectorAll('.project-download').forEach(link => {
-    const file = link.dataset.file;
-    if (file) link.href = file;
-  });
-
-  // Skills visual: staggered entrance animation
-  const skillsGrid = document.querySelector('.skills-visual-grid');
-  if (skillsGrid) {
-    const bubbles = Array.from(skillsGrid.querySelectorAll('.skill-bubble'));
-    bubbles.forEach((b, i) => {
-      b.style.setProperty('--i', i);
-      b.dataset.index = i;
-    });
-    // small timeout to allow CSS transition
-    setTimeout(() => skillsGrid.classList.add('loaded'), 120);
-  }
-
-  // Reveal skillicons image with shimmer and small parallax effect
-  const skillsWrap = document.querySelector('.skillsicons-wrap');
-  const skillsImg = document.querySelector('.skillsicons-img');
-  if (skillsWrap && skillsImg) {
-    const reveal = () => {
-      skillsWrap.classList.add('revealed');
-      // remove only the image observer after reveal so we don't stop the global observer
-      try { if (imgObserver) imgObserver.disconnect(); } catch (e) { /* ignore if not defined */ }
-    };
-
-    // reveal on intersection
-    const imgObserver = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) reveal(); });
-    }, { threshold: 0.2 });
-    imgObserver.observe(skillsWrap);
-
-    // mouse parallax
-    skillsWrap.addEventListener('mousemove', (e) => {
-      const rect = skillsWrap.getBoundingClientRect();
-      const dx = (e.clientX - rect.left) / rect.width - 0.5; // -0.5..0.5
-      const dy = (e.clientY - rect.top) / rect.height - 0.5;
-      skillsImg.style.transform = `translate3d(${dx * 8}px, ${dy * 6}px, 0) scale(1.02)`;
-    });
-    skillsWrap.addEventListener('mouseleave', () => {
-      skillsImg.style.transform = '';
-    });
-  }
-
-  // Resume download fallback: if resume file missing, disable link gracefully
-  const resumeLink = document.getElementById('download-resume');
-  if (resumeLink) {
-    resumeLink.addEventListener('click', (e) => {
-      // Let browser attempt download; if file missing server returns 404.
-      // Optionally we could check via fetch and warn, but keeping it simple.
-    });
-  }
-
-  // Video modal open/close handlers
-  const videoModal = document.getElementById('video-modal');
-  const videoIframe = document.getElementById('video-iframe');
-  const openVideoBtns = document.querySelectorAll('.open-video-btn');
-
-  function openVideo(url) {
-    if (!videoModal || !videoIframe) return;
-    // set src lazily to avoid loading before user interaction
-    videoIframe.src = url;
-    videoModal.classList.add('open');
-    videoModal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    // Move focus into modal for accessibility
-    const closeBtn = videoModal.querySelector('.video-modal-close');
-    if (closeBtn) closeBtn.focus();
-  }
-
-  function closeVideo() {
-    if (!videoModal || !videoIframe) return;
-    videoModal.classList.remove('open');
-    videoModal.setAttribute('aria-hidden', 'true');
-    // remove src to stop playback and free resources
-    videoIframe.src = '';
-    document.body.style.overflow = '';
-  }
-
-  openVideoBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const url = btn.getAttribute('data-video-src');
-      if (url) openVideo(url);
-    });
-  });
-
-  // close on elements with [data-close] (backdrop and close button)
-  if (videoModal) {
-    videoModal.addEventListener('click', (e) => {
-      if (e.target && e.target.hasAttribute && e.target.hasAttribute('data-close')) {
-        closeVideo();
+    // Close menu on Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menu.classList.contains('open')) {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
       }
     });
   }
+})();
 
-  // close on ESC
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && videoModal && videoModal.classList.contains('open')) {
-      closeVideo();
-    }
+// Smooth scroll for anchor links
+(function () {
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        var headerOffset = 80;
+        var elementPosition = target.getBoundingClientRect().top;
+        var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+})();
+
+// Scroll reveal animation
+(function () {
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion) return;
+
+  var reveals = document.querySelectorAll('.reveal');
+
+  if (!reveals.length) return;
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -40px 0px'
   });
 
-});
-// Performance optimization: debounce scroll events
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
+  reveals.forEach(function (el) {
+    observer.observe(el);
+  });
+})();
 
-// Optimized scroll handler
-const optimizedScrollHandler = debounce(() => {
-  // Additional scroll-based animations can be added here
-}, 16); // ~60fps
+// Footer year
+(function () {
+  var yearEl = document.getElementById('footer-year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+})();
 
-window.addEventListener('scroll', optimizedScrollHandler);
+// Header shadow on scroll
+(function () {
+  var header = document.querySelector('.site-header');
+  if (!header) return;
 
-// Preload animations for better performance
-document.addEventListener('DOMContentLoaded', () => {
-  // Force layout recalculation for smoother animations
-  document.body.offsetHeight;
-  
-  // Add loaded class to body for any additional styling
-  document.body.classList.add('loaded');
-});
+  var ticking = false;
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      window.requestAnimationFrame(function () {
+        if (window.pageYOffset > 10) {
+          header.style.boxShadow = '0 1px 0 rgba(255,255,255,0.06)';
+        } else {
+          header.style.boxShadow = 'none';
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+})();
