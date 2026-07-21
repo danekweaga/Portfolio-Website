@@ -27,9 +27,7 @@
     <div class="header-meta"><span class="clock" aria-label="Local time"></span><span class="greeting" aria-live="polite">Hello</span></div>
     <a class="wordmark" href="index.html" aria-label="nonso.codes home"><img src="nonso wo bg.png" alt="nonso.codes"></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span><span class="sr-only">Open navigation</span></button>
-    <nav id="site-nav" class="site-nav" aria-label="Main navigation">
-      <a href="index.html" data-nav="home">Home</a><a href="work.html" data-nav="work">Work</a><a href="experience.html" data-nav="experience">Experience</a><a href="about.html" data-nav="about">About</a><a href="https://drive.google.com/file/d/1cFklpjNJI2-tKJNjwq6rfoWKYUwmiJXJ/view?usp=sharing" target="_blank" rel="noopener noreferrer">Résumé</a>
-    </nav>
+    <nav id="site-nav" class="site-nav" aria-label="Main navigation"></nav>
   </header>
   <main id="main">
     <section class="hero grid-field">
@@ -37,20 +35,28 @@
         <p class="hero-kicker">Applied Computer Science · Dalhousie University</p>
         <h1>Chukwunonso Daniel Ekweaga</h1>
         <p class="hero-line">Applied Computer Science student building full-stack, AI, cloud and data products.</p>
-        <p class="hero-copy">I’m Nonso, a student developer at Dalhousie University who enjoys taking ideas from rough concepts to working, deployed software.</p>
+        <p class="hero-copy">I’m Nonso, a student developer at Dalhousie University. I focus on understanding the problem, shipping the smallest complete workflow, then reviewing, testing and documenting what I publish. I use AI tools to accelerate prototyping and debugging, but I own the systems I ship.</p>
         <div class="actions"><a class="button" href="work.html">View my work</a><a class="text-link" href="https://drive.google.com/file/d/1cFklpjNJI2-tKJNjwq6rfoWKYUwmiJXJ/view?usp=sharing" target="_blank" rel="noopener noreferrer">View résumé <span aria-hidden="true">↗</span></a></div>
         <div class="social-links"><a href="https://github.com/danekweaga" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/chukwunonso-daniel-ekweaga/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="mailto:danielekweaga@gmail.com">Email</a></div>
       </div>
     </section>
     <section class="section shell reveal">
+      <div class="section-heading"><p>Process</p><h2>How I build</h2></div>
+      <div class="process-grid">
+        <article class="process-step"><span class="number">01</span><h3>Understand the problem</h3><p>Clarify who the system is for, what has to work end to end, and which constraints matter before writing code.</p></article>
+        <article class="process-step"><span class="number">02</span><h3>Build the smallest complete workflow</h3><p>Ship a thin path that covers input, processing and output so the product can be used and inspected early.</p></article>
+        <article class="process-step"><span class="number">03</span><h3>Verify and document</h3><p>Review AI-assisted and hand-written changes, check failure paths, and document decisions so the system stays maintainable.</p></article>
+      </div>
+    </section>
+    <section class="section shell reveal">
       <div class="section-heading"><p>Selected work</p><h2>Three things I’ve built</h2><a href="work.html">See all work →</a></div>
       <div class="project-list home-projects">
-        <article><h3><a href="projects/becoming.html">Becoming</a></h3><p>A full-stack habit and growth tracker built around seasons, daily check-ins and long-term reflection.</p><small>Next.js, Prisma, PostgreSQL, AWS Aurora</small><a class="row-link" href="projects/becoming.html">View project →</a></article>
+        <article><h3><a href="projects/moneycheck.html">MoneyCheck</a></h3><p>A decision-support app that turns a purchase scenario into structured budget, risk and long-term impact analysis.</p><small>Next.js, Supabase, PostgreSQL, OpenAI, Vercel</small><a class="row-link" href="projects/moneycheck.html">View project →</a></article>
         <article><h3><a href="projects/courtledger.html">CourtLedger</a></h3><p>A secure sports analytics dashboard for recording results and understanding performance over time.</p><small>React, TypeScript, Supabase, Recharts</small><a class="row-link" href="projects/courtledger.html">View project →</a></article>
         <article><h3><a href="projects/azure-monitor.html">Azure Serverless Uptime Monitor</a></h3><p>A serverless system that checks services on a schedule and records uptime and response history.</p><small>Python, Azure Functions, Azure Storage, GitHub Actions</small><a class="row-link" href="projects/azure-monitor.html">View project →</a></article>
       </div>
     </section>
-    <section class="section shell now reveal"><div class="section-heading"><p>Now</p><h2>What I’m focused on</h2></div><ul><li>Backend AI Engineering Track at FlyRank AI</li><li>Building and validating KlearBooks</li><li>Open to Fall 2026 internships</li></ul></section>
+    <section class="section shell now reveal"><div class="section-heading"><p>Now</p><h2>What I’m focused on</h2></div><ul><li>Backend AI Engineering Track at FlyRank AI</li><li>Building and validating KlearBooks</li><li>Open to Fall 2026 internships and 2027 opportunities</li></ul></section>
     <section class="contact-cta shell reveal"><p>Have an opportunity or an interesting project?</p><h2>Let’s talk.</h2><a class="button" href="mailto:danielekweaga@gmail.com">Email Nonso</a></section>
   </main>
   <footer class="site-footer shell"><p>© <span data-year></span> Chukwunonso Daniel Ekweaga</p><p>Halifax, Nova Scotia</p></footer>

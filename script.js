@@ -1,6 +1,37 @@
-document.addEventListener('DOMContentLoaded', () => {
+// Edit NAV_LINKS to update site navigation everywhere.
+const NAV_LINKS = [
+  { href: '/', label: 'Home', nav: 'home' },
+  { href: '/work.html', label: 'Work', nav: 'work' },
+  { href: '/experience.html', label: 'Experience', nav: 'experience' },
+  { href: '/about.html', label: 'About', nav: 'about' },
+  {
+    href: 'https://drive.google.com/file/d/1cFklpjNJI2-tKJNjwq6rfoWKYUwmiJXJ/view?usp=sharing',
+    label: 'Résumé',
+    external: true,
+  },
+];
+
+function renderNav() {
+  const nav = document.getElementById('site-nav');
+  if (!nav) return;
+
   const page = document.body.dataset.page;
-  document.querySelector(`[data-nav="${page}"]`)?.setAttribute('aria-current', 'page');
+  nav.replaceChildren(...NAV_LINKS.map(({ href, label, nav: navKey, external }) => {
+    const link = document.createElement('a');
+    link.href = href;
+    link.textContent = label;
+    if (navKey) link.dataset.nav = navKey;
+    if (external) {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    }
+    if (navKey && navKey === page) link.setAttribute('aria-current', 'page');
+    return link;
+  }));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderNav();
 
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
