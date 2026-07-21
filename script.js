@@ -5,7 +5,7 @@ const NAV_LINKS = [
   { href: '/experience.html', label: 'Experience', nav: 'experience' },
   { href: '/about.html', label: 'About', nav: 'about' },
   {
-    href: 'https://drive.google.com/file/d/1cFklpjNJI2-tKJNjwq6rfoWKYUwmiJXJ/view?usp=sharing',
+    href: 'https://drive.google.com/file/d/1_WI9vFpjo9YDDhUmK-vOrO5eWy5nVX_5/view?usp=sharing',
     label: 'Résumé',
     external: true,
   },
