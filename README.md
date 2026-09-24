@@ -1,6 +1,6 @@
 # Portfolio Website
 
-Personal portfolio for [nonso.codes](https://nonso.codes/), deployed as static HTML on GitHub Pages.
+Personal portfolio for [nonso.online](https://nonso.online/), deployed as static HTML on GitHub Pages.
 
 ## Local preview
 

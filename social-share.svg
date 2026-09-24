@@ -47,7 +47,7 @@
   <text x="80" y="340" font-family="monospace" font-size="16" fill="#525252">TypeScript · React · Python · PostgreSQL · AWS · Azure</text>
 
   <!-- Website -->
-  <text x="80" y="580" font-family="Arial, sans-serif" font-size="18" fill="#34d399">nonso.codes</text>
+  <text x="80" y="580" font-family="Arial, sans-serif" font-size="18" fill="#34d399">nonso.online</text>
 
   <!-- Right side decoration -->
   <g opacity="0.06">
